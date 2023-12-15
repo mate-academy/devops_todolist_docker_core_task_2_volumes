@@ -53,8 +53,8 @@ or start on the [landing page](http://localhost:8000/)
 5. You should be able to successfully run a Django App in a container that will connect to a MySQL db container that is already started
 6. Push mysql-local:1.0.0 to your personal docker hub into mysql-local repository
 7. Build and push your updated app Image with a name and tag: todoapp:2.0.0
-8. Update README.md with instructions on how to run MySQL container with a volume attached
-9. Update README.md with instructions on how to run an App container which will connect to a MySQL db container.
+8. Update README.md with instructions on how to build and run MySQL container with a volume attached
+9. Update README.md with instructions on how to build and run an App container which will connect to a MySQL db container.
 10. README.md should contain a link to your docker hub repository with mysql image
 11. README.md should contain a link to your docker hub repository with todoapp image
 12. Create Pull Request with your changes and attach it for validation on a platform
