@@ -62,15 +62,15 @@ or start on the [landing page](http://localhost:8000/)
 ## Task 2 result
 - ### Docker commands:
     - Create network:\
-    `docker network create -d bridge mynetdocker`
+    `docker network create -d bridge mynet`
     - Build app image:\
-    `build --tag yurakolam/todoapp:2.0.0 --build-arg VERSION=3.9 --file ./Dockerfile .`
+    `docker build --tag <DockerHub user>/todoapp:2.0.0 --build-arg VERSION=3.9 --file ./Dockerfile .`
     - Build database image:\
-    `docker build --tag yurakolam/mysql-local:1.0.0 --file ./Dockerfile.mysql .`\
+    `docker build --tag <DockerHub user>/mysql-local:1.0.0 --file ./Dockerfile.mysql .`\
     - Run database container:\
-    `docker run -d -p 3306:3306 -v mysql:/var/lib/mysql --network=mynet --hostname=database --name mysql yurakolam/mysql-local:1.0.0`
+    `docker run -d -p 3306:3306 -v mysql:/var/lib/mysql --network=mynet --hostname=database --name mysql <DockerHub user>/mysql-local:1.0.0`
     - Run app container:\
-    `docker run -d  -p 8080:8080 --network=mynet --name todoapp yurakolam/todoapp:2.0.0`
+    `docker run -d  -p 8080:8080 --network=mynet --name todoapp <DockerHub user>/todoapp:2.0.0`
 - ### DockerHub links:
     - [Database image](https://hub.docker.com/layers/yurakolam/mysql-local/1.0.0/images/sha256-beffdcf66b55f6e8bcdb4bb45f737973af82c750aa15742b996dbc185dfe73c7?context=repo)
     - [App image](https://hub.docker.com/layers/yurakolam/todoapp/2.0.0/images/sha256-1c1bc8f368098eccea631e187c4ccde02ccd8a5e860255919db071b96fc778e7?context=repo)
