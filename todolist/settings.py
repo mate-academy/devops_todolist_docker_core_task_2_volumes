@@ -67,8 +67,8 @@ DATABASES = {
         'NAME': 'app_db',
         'USER': 'app_user',
         'PASSWORD': '1234',
-        'HOST': 'localhost',  # You can use a different host in your MySQL server is on a remote machine.
-        'PORT': '',  # Leave this empty to use the default MySQL port (3306).
+        'HOST': '172.17.0.2',  # You can use a different host in your MySQL server is on a remote machine.
+        'PORT': '3306',  # Leave this empty to use the default MySQL port (3306).
     }
 }
 
@@ -86,7 +86,7 @@ DATABASES = {
     #     "PASSWORD": "my-secret-pw", 
     #     "USER": "root",
     # }
-}
+#}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
