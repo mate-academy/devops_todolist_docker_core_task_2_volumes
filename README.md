@@ -1,50 +1,18 @@
-# Django-Todolist
-
-Django-Todolist is a todolist web application with the most basic features of most web apps, i.e. accounts/login, API and (somewhat) interactive UI.
-
----
-CSS | [Skeleton](http://getskeleton.com/)
-JS  | [jQuery](https://jquery.com/)
-
-## Explore
-Try it out by installing the requirements. (Works only with python >= 3.8, due to Django 4)
-
-    pip install -r requirements.txt
-
-Create a database schema:
-
-    python manage.py migrate
-
-And then start the server (default: http://localhost:8000)
-
-    python manage.py runserver
+https://snipboard.io/3njXwD.jpg
 
 
-Now you can browse the [API](http://localhost:8000/api/)
-or start on the [landing page](http://localhost:8000/)
+docker build . -f Dockerfile.mysql -t mysql-local:1.0.0
+docker run -d -p 3306:3306 --name mysql-local mysql-local:1.0.0
 
-## Task
-#### Prerequisites
-- Fork this repository
-- Open requirements.txt
-- Add mysql-connector-python==8.2.0
-- Open file todolist/settings.py
-- Go to line DATABASES on line 64
-- Update it with this code:
+docker build . -f Dockerfile -t todoapp:2.0.0
+docker run -d -p 8080:8080 --name todoapp: todoapp:2.0.0
 
-    ```
-    DATABASES = {
-        'default': {
-            'ENGINE': 'mysql.connector.django',
-            'NAME': 'app_db',
-            'USER': 'app_user',
-            'PASSWORD': '1234',
-            'HOST': 'localhost',  # You can use a different host in your MySQL server is on a remote machine.
-            'PORT': '',  # Leave this empty to use the default MySQL port (3306).
-        }
-    }
+https://hub.docker.com/repositories/ladmael
 
-    ```
+run sql first for take req IP (172.17.0.2)
+run app
+go to localhost:8080
+
 #### Requirements
 1. Prepare a Dockerfile to run a MySQL database, based on official MySQL Image
 2. Dockerfile should contain ENV variables to initialize app_db database
