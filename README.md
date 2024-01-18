@@ -2,15 +2,20 @@ https://snipboard.io/3njXwD.jpg
 
 
 docker build . -f Dockerfile.mysql -t mysql-local:1.0.0
+
 docker run -d -p 3306:3306 --name mysql-local mysql-local:1.0.0
 
+
 docker build . -f Dockerfile -t todoapp:2.0.0
+
 docker run -d -p 8080:8080 --name todoapp: todoapp:2.0.0
 
 https://hub.docker.com/repositories/ladmael
 
 run sql first for take req IP (172.17.0.2)
+
 run app
+
 go to localhost:8080
 
 #### Requirements
