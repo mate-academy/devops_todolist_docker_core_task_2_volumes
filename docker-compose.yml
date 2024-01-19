@@ -1,0 +1,44 @@
+version: '3'
+
+networks:
+  db-data-net:
+    driver: bridge
+
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_DATABASE=app_db
+      - MYSQL_USER=app_user
+      - MYSQL_PASSWORD=1234
+    networks:
+      - db-data-net
+
+  todoapp:
+    image: todoapp:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - PYTHON_VERSION=3.8
+    ports:
+      - "8080:8080"
+    environment:
+      - APP_ENV=Development
+      - PYTHONUNBUFFERED=1
+    networks:
+      - db-data-net
+    depends_on:
+      - mysql
+    restart: always
+    entrypoint: ["python", "manage.py", "runserver", "0.0.0.0:8080"]
+
+volumes:
+  db-data:
+

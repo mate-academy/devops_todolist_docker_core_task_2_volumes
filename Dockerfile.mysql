@@ -1,4 +1,4 @@
-FROM mysql
+FROM mysql:latest
 
 ENV MYSQL_ROOT_PASSWORD=1234
 ENV MYSQL_DATABASE=app_db
@@ -10,6 +10,3 @@ EXPOSE 3306
 
 # Set the data directory as a volume
 VOLUME /var/lib/mysql
-
-# Copy SQL initialization script to set up the database and user
-COPY ./mysql/init.sql /docker-entrypoint-initdb.d/

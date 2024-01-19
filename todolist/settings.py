@@ -23,7 +23,7 @@ SECRET_KEY = "@e2(yx)v&tgh3_s=0yja-i!dpebxsz^dg47x)-k&kq_3zf*9e*"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0' , 'mysql']
 
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
@@ -67,7 +67,7 @@ DATABASES = {
             'NAME': 'app_db',
             'USER': 'app_user',
             'PASSWORD': '1234',
-            'HOST': '172.17.0.2',  # You can use a different host in your MySQL server is on a remote machine.
+            'HOST': 'mysql',  # You can use a different host in your MySQL server is on a remote machine.
             'PORT': '',  # Leave this empty to use the default MySQL port (3306).
         }
     }
