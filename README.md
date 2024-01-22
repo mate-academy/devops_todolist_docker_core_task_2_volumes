@@ -1,7 +1,11 @@
 https://snipboard.io/3njXwD.jpg
 
 
-docker-compose up
+docker build . -t todoapp:1.0.0 -f Dockerfile
+docker build . -t mysql-local:1.0.0 -f Dockerfile.mysql
+
+docker run -d -p "3306:3306" --network db-network --name mysql-local mysql-local:1.0.0
+docker run -d -p "8080:8080" --network db-network --name todoapp todoapp:1.0.0
 
 https://hub.docker.com/repositories/ladmael
 
