@@ -3,13 +3,11 @@ https://snipboard.io/3njXwD.jpg
 
 docker build . -t todoapp:1.0.0 -f Dockerfile
 docker build . -t mysql-local:1.0.0 -f Dockerfile.mysql
-
+docker network create -d bridge db-network
 docker run -d -p "3306:3306" --network db-network --name mysql-local mysql-local:1.0.0
 docker run -d -p "8080:8080" --network db-network --name todoapp todoapp:1.0.0
 
 https://hub.docker.com/repositories/ladmael
-
-docker-compose up
 
 #### Requirements
 1. Prepare a Dockerfile to run a MySQL database, based on official MySQL Image
