@@ -55,7 +55,7 @@ or start on the [landing page](http://localhost:8000/)
 ## Using Docker
 
 ### 1) Getting a container for database
-A Docker file is already included in the repository, but you can also download a ready image from [Docker Hub](https://hub.docker.com/r/oksanamiazina/todoapp):
+A Docker file is already included in the repository, but you can also download a ready image from [Docker Hub](https://hub.docker.com/r/oksanamiazina/mysql-local):
 
 ```
 docker pull oksanamiazina/mysql-local:1.0.0
