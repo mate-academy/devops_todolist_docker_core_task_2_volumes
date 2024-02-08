@@ -22,8 +22,7 @@ RUN apk update \
     && apk add --no-cache musl-dev python3-dev \
     && apk add --no-cache gcc \
     && apk add --no-cache libc-dev \
-    && apk add --no-cache mariadb-connector-c \
-    && pip install mysql-connector-python
+    && apk add --no-cache mariadb-connector-c
 
 # This RUN need to build correctly on my local machine
 RUN echo "ulimit -s unlimited" >> /etc/profile.d/ulimit.sh
