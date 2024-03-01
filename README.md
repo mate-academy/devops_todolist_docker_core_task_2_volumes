@@ -62,3 +62,32 @@ or start on the [landing page](http://localhost:8000/)
 14. README.md should contain a link to your personal docker hub repository win an app image
 15. README.md should contain instructions on how to access the application via a browser.
 16. Create PR with your changes and attach it for validation on a platform
+
+
+# My Project
+
+## Docker Hub Repositories
+
+For more details or to download different versions of the images, you can visit the Docker Hub pages:
+
+MySQL Image Repository: MySQL Local Image on Docker Hub https://hub.docker.com/layers/yaroslavya27/mysql-local/1.0.0/images/sha256-c9e9ec779e07aac1c356efde3a8227cd6b90ab6e337db81a3d545839e2a2929d?context=repo
+
+Django App Image Repository: Django App Image on Docker Hub https://hub.docker.com/layers/yaroslavya27/todoapp/2.0.0/images/sha256-51a74a0ef0094626321dc6ebbdb950a843024e86dd7bb0323cdf6e3ad7eebdf8?context=repo
+
+## Running MySQL container with a Volume Attached
+For build image of app i used command:
+docker build -t mysql-local:1.0.0 .
+
+To run the MySQL container with a volume, execute the following command:
+docker run --name mysql-container -v mysql-volume:/var/lib/mysql -d mysql-local:1.0.0
+
+## Running the App container which will connect to the MySQL db container
+For build image of app i used command:
+docker build . -t django-app:1.0
+
+Run docker container with this command:
+docker run -d -p 8081:8080 --name django-server django-app:1.0
+
+## Accessing the Application
+
+To access the application via a browser, navigate to: http://localhost:8001
