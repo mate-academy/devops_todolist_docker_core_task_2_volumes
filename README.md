@@ -6,7 +6,7 @@ Django-Todolist is a todolist web application with the most basic features of mo
 
 1. Pull the MySQL image and run a container with a volume attached using the following command:
     ```bash
-    docker run -d -v mysql_data:/var/lib/mysql --name mysql-container -e MYSQL_ROOT_PASSWORD=1234 -e MYSQL_DATABASE=app_db -e MYSQL_USER=app_user -e MYSQL_PASSWORD=1234 mysql-local:1.0.0
+    docker run -d -v mysql_data:/var/lib/mysql --name mysql-container
     ```
    This command will create a MySQL container named `mysql-container` with the specified environment variables and a volume named `mysql_data`.
 
