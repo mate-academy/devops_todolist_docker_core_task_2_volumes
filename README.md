@@ -67,14 +67,16 @@ In order to start application you should execute the next steps:
 1. You must have Docker installed
 2. Start your Docker application
 3. Download the next docker images. Execute the next commands in terminal
-docker push yaaszp/todoapp:2.0.0
-docker push yaaszp/mysql-local:1.0.0
+docker pull yaaszp/todoapp:2.0.0
+docker pull yaaszp/mysql-local:1.0.0
 4. Run the containers from the docker images. Execute the next commands in terminal
-Run the container with the application
-docker run -d -p 8080:8080 --name todoapp yaaszp/todoapp:2.0.0
 Run the container with the DB
 docker run -d -p 3306:3306 --name sql-db -v sql-db-data:/var/lib/mysql yaaszp/mysql-local:1.0.0
+Run the container with the application
+docker run -d -p 8080:8080 --name todoapp yaaszp/todoapp:2.0.0
 5. Check the statuses of the containers (status has to be 'UP')
 docker container list -a
 6. Open your browser and enter the next URL
 localhost:8080
+7. In project folder you can see todoapp.jpg and terminal.jpg files
+
