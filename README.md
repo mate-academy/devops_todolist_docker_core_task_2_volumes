@@ -62,3 +62,10 @@ or start on the [landing page](http://localhost:8000/)
 14. README.md should contain a link to your personal docker hub repository win an app image
 15. README.md should contain instructions on how to access the application via a browser.
 16. Create PR with your changes and attach it for validation on a platform
+  
+  
+  Step-by-Step Process
+
+1. Pull the images from  Docker Hub page using: https://hub.docker.com/repository/docker/shcherbanvasyl499/mysql-local/general    and  https://hub.docker.com/layers/shcherbanvasyl499/todoapp/2.0.0
+2. start containers with docker run comand 
+follow link http://localhost:8080/
