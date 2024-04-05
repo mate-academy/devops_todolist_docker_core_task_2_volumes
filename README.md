@@ -66,8 +66,8 @@ or start on the [landing page](http://localhost:8000/)
 
 ## Instructions 
 
-[MySQL Docker Hub Repository](https://hub.docker.com/repository/docker/nkond22/mysql-local/general)
-[TodoApp Docker Hub Repository](https://hub.docker.com/repository/docker/nkond22/todoapp/general)
+[MySQL Docker Hub Repository](https://hub.docker.com/repository/docker/mkostiuk98/mysql-local/general)
+[TodoApp Docker Hub Repository](https://hub.docker.com/repository/docker/mkostiuk98/todoapp2/general)
 
 ### How to run MySQL container with a volume attached
 
