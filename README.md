@@ -67,5 +67,10 @@ or start on the [landing page](http://localhost:8000/)
   Step-by-Step Process
 
 1. Pull the images from  Docker Hub page using: https://hub.docker.com/repository/docker/shcherbanvasyl499/mysql-local/general    and  https://hub.docker.com/layers/shcherbanvasyl499/todoapp/2.0.0
-2. start containers with docker run comand 
-follow link http://localhost:8080/
+2. Build and run MySQL DB with 
+docker pull shcherbanvasyl499/mysql-local:latest
+docker run --name mysql-local-container -e MYSQL_ROOT_PASSWORD=1234 -d shcherbanvasyl499/mysql-local:latest
+3. Build and run todoup:2.0.0 with 
+docker pull shcherbanvasyl499/todoapp:2.0.0
+docker run --name todoapp-container -d -p 8080:8080 shcherbanvasyl499/todoapp:2.0.0
+Follow link http://localhost:8080/
