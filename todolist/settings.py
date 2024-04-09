@@ -53,6 +53,11 @@ MIDDLEWARE = (
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 )
 
+ROOT_URLCONF = "todolist.urls"
+
+WSGI_APPLICATION = "todolist.wsgi.application"
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'mysql.connector.django',
