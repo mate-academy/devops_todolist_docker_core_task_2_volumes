@@ -5,6 +5,8 @@ Django-Todolist is a todolist web application with the most basic features of mo
 [dockerhub todoapp](https://hub.docker.com/repository/docker/38vmamchur/todoapp/general)
 [dockerhub mysql-local](https://hub.docker.com/repository/docker/38vmamchur/mysql-local/general)
 
+![](./run-app.png)
+
 ## Explore
 1. Pull MySQL image: 
 ```
