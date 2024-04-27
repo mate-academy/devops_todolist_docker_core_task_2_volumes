@@ -1,6 +1,17 @@
-FROM mysql:5.7
-ENV MYSQL_DATABASE=app_db
-ENV MYSQL_USER=app_user
-ENV MYSQL_PASSWORD=1234
-ENV MYSQL_ROOT_PASSWORD=1234
+# Use the official image as a parent image
+FROM mysql:latest
+
+# Set the environment variables for initialization
+ENV MYSQL_DATABASE=app_db \
+    MYSQL_USER=app_user \
+    MYSQL_PASSWORD=1234 \
+    MYSQL_ROOT_PASSWORD=1234
+
+# When the container starts, this environment variable will be passed to the entrypoint script (in the MySQL image)
+ENV MYSQL_ALLOW_EMPTY_PASSWORD=true
+
+# Expose the port MySQL is reachable on
 EXPOSE 3306
+
+# Set the default command to run when starting the container
+CMD ["mysqld"]

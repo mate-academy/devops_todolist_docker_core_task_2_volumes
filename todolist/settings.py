@@ -62,24 +62,17 @@ WSGI_APPLICATION = "todolist.wsgi.application"
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-        'USER': 'app_user',            # My database user
-        'PASSWORD': '1234',            # My database password
-        'HOST': '172.17.0.3',          # My IP address of the MySQL container
-        'PORT': '', 
+    'default': {
+        'ENGINE': 'mysql.connector.django',
+        'NAME': 'app_db',
+        'USER': 'app_user',
+        'PASSWORD': '1234',
+        'HOST': '172.17.0.2',  # You can use a different host in your MySQL server is on a remote machine.
+        'PORT': '',  # Leave this empty to use the default MySQL port (3306).
     }
-
-    # "default": {
-    #     "ENGINE": "django.db.backends.mysql",
-    #     "HOST": "FVFFM3F5Q05N", 
-    #     "PORT": 3306,
-    #     "NAME":"tododb",
-    #     "PASSWORD": "my-secret-pw", 
-    #     "USER": "root",
-    # }
 }
+ 
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
