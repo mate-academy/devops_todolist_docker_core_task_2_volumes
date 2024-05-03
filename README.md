@@ -5,7 +5,7 @@ Update README.md with instructions on how to run an App container which will con
 docker build . -t todoapp:2.0.0
 docker run -d -p 8081:8080 --name todoapp todoapp:2.0.0
 README.md should contain a link to your personal docker hub repository win an app image
-https://hub.docker.com/r/salaxambar/mysql-local
-https://hub.docker.com/r/salaxambar/todoapp2
+[docker hub mysql](https://hub.docker.com/r/salaxambar/mysql-local)
+[docker hub todoapp](https://hub.docker.com/r/salaxambar/todoapp2)
 README.md should contain instructions on how to access the application via a browser:
 run http://localhost:8081/ at your browser
