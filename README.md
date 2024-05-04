@@ -96,7 +96,7 @@ Use this command to start the MySQL container with the volume attached:
         -e MYSQL_USER=app_user \
         -e MYSQL_PASSWORD=1234 \
         -p 3306:3306 \
-        -d mysql:5.7
+        -d mysql-local:1.0.0
 
 Make sure to replace mysql:5.7 with the tag you have used for your MySQL image if it's different.
 
