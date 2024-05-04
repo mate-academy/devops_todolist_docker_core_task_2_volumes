@@ -6,10 +6,6 @@ WORKDIR /app
 COPY . .
 
 
-RUN pip install --upgrade pip && \
-    pip install -r requirements.txt
-
-
 FROM python:${PYTHON_VERSION} as run
 
 WORKDIR /app
