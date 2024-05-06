@@ -83,7 +83,7 @@ This command creates a new Docker volume named `mysql-data`:
 ### Step 2: Run MySQL Container
 Use this command to start the MySQL container with the volume attached:
 
-    docker run --name mysql-container -v mysql-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=1234 -e MYSQL_DATABASE=app_db -e MYSQL_USER=app_user -e MYSQL_PASSWORD=1234 -p 3306:3306 -d mysql-local:1.0.0
+    docker run --name mysql-container -v mysql-data:/var/lib/mysql -p 3306:3306 -d mysql-local:1.0.0
 
 
 ### Step 3: Push to Docker Hub (Optional)
