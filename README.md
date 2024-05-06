@@ -71,9 +71,6 @@ or start on the [landing page](http://localhost:8000/)
 
 To run the MySQL container with persistent storage, you need to create a volume and then run the container with that volume attached.
 
-## MySQL Container Setup
-
-To run the MySQL container with persistent storage, you need to create a volume and then run the container with that volume attached.
 
 ### Step 1: Create a Volume
 
@@ -82,31 +79,20 @@ This command creates a new Docker volume named `mysql-data`:
 
     docker volume create mysql-data
 
-2 To run the MySQL container with a volume attached, use the following commands:
-
-    docker run --name mysql-container -v mysql-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=1234 -d mysql-local:1.0.0
 
 ### Step 2: Run MySQL Container
 Use this command to start the MySQL container with the volume attached:
 
-    docker run --name mysql-container \
-        -v mysql-data:/var/lib/mysql \
-        -e MYSQL_ROOT_PASSWORD=1234 \
-        -e MYSQL_DATABASE=app_db \
-        -e MYSQL_USER=app_user \
-        -e MYSQL_PASSWORD=1234 \
-        -p 3306:3306 \
-        -d mysql-local:1.0.0
+    docker run --name mysql-container -v mysql-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=1234 -e MYSQL_DATABASE=app_db -e MYSQL_USER=app_user -e MYSQL_PASSWORD=1234 -p 3306:3306 -d mysql-local:1.0.0
 
-Make sure to replace mysql:5.7 with the tag you have used for your MySQL image if it's different.
 
 ### Step 3: Push to Docker Hub (Optional)
 If you need to push the image to Docker Hub, tag it first with your username and then push:
 
-    docker tag mysql:5.7 yourusername/mysql-local:1.0.0
+    docker tag mysql:1.0.0 yourusername/mysql-local:1.0.0
     docker push yourusername/mysql-local:1.0.0
 
-Replace yourusername with your actual Docker Hub username and mysql:5.7 with your image name and tag.
+Replace yourusername with your actual Docker Hub username and mysql:1.0.0 with your image name and tag.
 
 
 ## App Container Setup
