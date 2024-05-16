@@ -46,7 +46,7 @@ or start on the [landing page](http://localhost:8000/)
 
     ```
 #### Requirements
-1. Prepare a Dockerfile to run a MySQL database, based on official MySQL Image
+1. Prepare a Dockerfile to run a MySQL database, based on official MySQL Image, name file Dockerfile.mysql
 2. Dockerfile should contain ENV variables to initialize app_db database
 3. Dockerfile should contain ENV variables to initialize app_user with password 1234
 4. Build mysql image with a name and tag mysql-local:1.0.0
