@@ -62,3 +62,70 @@ or start on the [landing page](http://localhost:8000/)
 14. README.md should contain a link to your personal docker hub repository win an app image
 15. README.md should contain instructions on how to access the application via a browser.
 16. Create PR with your changes and attach it for validation on a platform
+
+# Todo App Deployment Instructions
+
+## Running MySQL Container with Volume
+
+## MySQL Container Setup
+
+To run the MySQL container with persistent storage, you need to create a volume and then run the container with that volume attached.
+
+
+### Step 1: Create a Volume
+
+This command creates a new Docker volume named `mysql-data`:
+
+
+    docker volume create mysql-data
+
+
+### Step 2: Run MySQL Container
+Use this command to start the MySQL container with the volume attached:
+
+    docker run --name mysql-container -v mysql-data:/var/lib/mysql -p 3306:3306 -d mysql-local:1.0.0
+
+
+### Step 3: Push to Docker Hub (Optional)
+If you need to push the image to Docker Hub, tag it first with your username and then push:
+
+    docker tag mysql:1.0.0 yourusername/mysql-local:1.0.0
+    docker push yourusername/mysql-local:1.0.0
+
+Replace yourusername with your actual Docker Hub username and mysql:1.0.0 with your image name and tag.
+
+
+## App Container Setup
+
+To run the application with a connection to the MySQL container, follow these steps:
+
+### Step 1: Build the App Image
+
+First, you need to build the image for your application using the Dockerfile in your project directory:
+
+
+    docker build -t yourusername/todoapp:2.0.0 .
+Replace yourusername with your Docker Hub username.
+
+### Step 2: Run the App Container
+After building the image, run the container using the following command:
+
+    docker run --name todoapp-container --link mysql-container:mysql -p 8000:8000 -d yourusername/todoapp:2.0.0
+
+This command does the following:
+
+- name todoapp-container assigns the name todoapp-container to your Docker container.
+- link mysql-container:mysql links your application container to the MySQL container. This allows the app to access the database using the hostname mysql.
+- -p 8000:8000 maps port 8000 of the container to port 8000 on the host machine.
+- -d runs the container in detached mode, which means it runs in the background.
+- yourusername/todoapp:2.0.0 is the name and tag of your image.
+
+Make sure the MySQL container is running before you start the app container.
+
+### Step 3: Access the App
+After the container starts, you can access the application by navigating to http://localhost:8000 in your web browser.
+
+
+
+# link for docker repository
+https://hub.docker.com/repository/docker/volry/todoapp
