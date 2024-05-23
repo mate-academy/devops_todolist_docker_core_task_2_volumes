@@ -62,3 +62,13 @@ or start on the [landing page](http://localhost:8000/)
 14. README.md should contain a link to your personal docker hub repository win an app image
 15. README.md should contain instructions on how to access the application via a browser.
 16. Create PR with your changes and attach it for validation on a platform
+#### For use:
+
+1. Pull the images from my Docker Hub page using the CLI:
+docker pull iryna0629/todoapp:2.0.0
+docker pull iryna0629/mysql-local:1.0.0
+2. Start the first container:
+docker run -d -p 3306:3306 --name mysql-local -v mysql-local-data:/var/lib/mysql iryna0629/mysql-local:1.0.0
+3. Start the second container:
+docker run -p 8081:8080 --name todoapp iryna0629/todoapp:2.0.0
+4. In your browser, go to the page http://localhost:8081
