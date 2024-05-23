@@ -1,5 +1,5 @@
 # Stage 1: Build Stage
-ARG PYTHON_VERSION=3.12
+ARG PYTHON_VERSION=3.8
 FROM python:${PYTHON_VERSION} as builder
 
 # Set the working directory
@@ -18,6 +18,6 @@ COPY --from=builder /app .
 RUN pip install --upgrade pip && \
     pip install -r requirements.txt
 
-EXPOSE 8080
+RUN python manage.py migrate
 
-ENTRYPOINT ["sh", "-c", "python manage.py migrate && python manage.py runserver 0.0.0.0:8080"]
+ENTRYPOINT ["python", "manage.py", "runserver", "0.0.0.0:8080"]
