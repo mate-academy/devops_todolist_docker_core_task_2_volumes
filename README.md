@@ -1,3 +1,31 @@
+# Instructions
+
+Download mysql image from [repository](https://hub.docker.com/repository/docker/horizon337/mysql-local)
+Download app image from [repository](https://hub.docker.com/layers/horizon337/todoapp/2.0.0/images/sha256-a0b9b4dcfd457836dfc1873a69805c1cd1fb1471c7d8b57561f98822b0baecc7?context=repo)
+
+Pull images:
+
+```
+docker pull horizon337/mysql-local
+docker pull horizon337/todoapp:2.0.0
+```
+
+OR
+
+Build images from Dockerfiles:
+```
+docker build . -f Dockerfile.mysql -t mysql-local:1.0.0
+docker build -t todoapp:2.0.0
+```
+
+Run containers via this command
+```
+docker run  -d -p 3306:3306 --name my-mysql -v my-mysql-data:/var/lib/mysql mysql-local:1.0.0
+docker run -p 8081:8080 todoapp:2.0.0
+```
+
+Access application via browser by [link](http://localhost:8081)
+
 # Django-Todolist
 
 Django-Todolist is a todolist web application with the most basic features of most web apps, i.e. accounts/login, API and (somewhat) interactive UI.
