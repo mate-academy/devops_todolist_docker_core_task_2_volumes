@@ -1,3 +1,32 @@
+# Instructions
+
+Download mysql image from [repository](https://hub.docker.com/layers/fishray/mysql-local/1.0.0/images/sha256-26a146b02912538333edd07c1c5f7bf4bb71c1f559f12967f0f4514aa660c381?context=repo)
+Download app image from [repository](https://hub.docker.com/layers/fishray/todoapp/2.0.0/images/sha256-846847a570e45ced27279956c398addc43e210e09b2092a5268d094f9c3d0191?context=repo)
+
+Pull images:
+
+```
+docker pull fishray/mysql-local:1.0.0
+docker pull fishray/todoapp:2.0.0
+```
+
+OR
+
+Build images from Dockerfiles:
+```
+docker build . -f Dockerfile.sql -t mysql-local:1.0.0
+docker build -t todoapp:2.0.0
+```
+
+Run containers via this command
+```
+docker run -d -p 3306:3306 --name my-mysql -v my-mysql-data:/var/lib/mysql mysql-local:1.0.0
+docker run -p 8080:8080 todoapp:2.0.0
+```
+
+Access application via browser by [link](http://localhost:8080)
+
+
 # Django-Todolist
 
 Django-Todolist is a todolist web application with the most basic features of most web apps, i.e. accounts/login, API and (somewhat) interactive UI.
