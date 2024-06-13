@@ -1,3 +1,21 @@
+### Instructions for running with Docker
+
+1. Pull database image and run container:
+(https://hub.docker.com/r/basilpanasiuk/mysql-local)
+```
+docker pull basilpanasiuk/mysql-local:1.0.0
+docker run -d -P -v my-sql-data:/var/lib/mysql --name my-mysql basilpanasiuk/mysql-local:1.0.0
+```
+
+2. Pull todoapp(v2) image and run container:
+(https://hub.docker.com/r/basilpanasiuk/todoapp)
+```
+docker pull basilpanasiuk/todoapp:2.0.0
+docker run -d -p 8080:8080 --name todo2-app basilpanasiuk/todoapp:2.0.0
+```
+
+3. To access the todoapp via browser - open 'http://localhost:8080' link.
+
 # Django-Todolist
 
 Django-Todolist is a todolist web application with the most basic features of most web apps, i.e. accounts/login, API and (somewhat) interactive UI.
