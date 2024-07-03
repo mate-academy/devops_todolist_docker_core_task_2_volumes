@@ -62,3 +62,13 @@ or start on the [landing page](http://localhost:8000/)
 14. README.md should contain a link to your personal docker hub repository win an app image
 15. README.md should contain instructions on how to access the application via a browser.
 16. Create PR with your changes and attach it for validation on a platform
+
+Steps:
+1. Creating init.sql DB
+2. Creating Dockerfile.mysql with data for DB login and path to DB file
+3. Building Dockerfile.mysql
+4. Running docker run -d -p 3306:3306 --name mysql-container-local -v mysql-data:/var/lib/mysql mysql-local:1.0
+5. Finding IP for DB with docker network inspect and putting that ip to settings.py
+6. Building image todoapp with docker build -t todoapp:1.0 .
+7. Running todoapp docker run -d -p 8080:8080 --name todoapp-container todoapp:1.0
+8. Pushing to Docker Hub repo
