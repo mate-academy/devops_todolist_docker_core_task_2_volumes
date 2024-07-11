@@ -62,3 +62,17 @@ or start on the [landing page](http://localhost:8000/)
 14. README.md should contain a link to your personal docker hub repository win an app image
 15. README.md should contain instructions on how to access the application via a browser.
 16. Create PR with your changes and attach it for validation on a platform
+
+## Guide
+
+1. To run the app execute the following commands:
+    ```
+    docker run -d -p 3306:3306 --name mysql -v app-data:/var/lib/mysql mysql-local:1.0.0
+    ```
+    ```
+    docker run -p 8080:8080 todoapp:2.0.0
+     ```
+
+2. You can find the  [App 2.0.0](https://hub.docker.com/layers/dariasavchenko/todoapp/2.0.0/images/sha256-ff2363c120fe8bca815ba9faa513b7b1b1612128053574e0bc860fdf9b179148?context=repo) and [mysql 1.0.0](https://hub.docker.com/layers/dariasavchenko/mysql-local/1.0.0/images/sha256-58371c984ce71fd12521c2d82f1f493bb71106f022c90ff134bea9a7cd87db82?context=repo) images by following the links.
+
+3. You can browse the [API](http://localhost:8080/api/) or start on the [landing page](http://localhost:8080/) by following the links.
