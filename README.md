@@ -7,18 +7,31 @@ CSS | [Skeleton](http://getskeleton.com/)
 JS  | [jQuery](https://jquery.com/)
 
 ## Explore
+[Link to DockerHub Reposiitory](https://hub.docker.com/repository/docker/vshvanska/todoapp/)
+
+Pull database image
+
+   ``` 
+   docker pull vshvanska/mysql-local:1.0.0 
+   ```
+
 Try it out by installing the requirements. (Works only with python >= 3.8, due to Django 4)
 
-    pip install -r requirements.txt
+Run database container
 
-Create a database schema:
+``` 
+docker run  -d -p 3306:3306 --name mysql_db -v my-mysql-data:/var/lib/mysql mysql-local:1.0.0
+```
 
-    python manage.py migrate
+Pull and run database image
 
-And then start the server (default: http://localhost:8000)
+```angular2html
+docker pull vshvanska/todoapp:2.0.0
+```
 
-    python manage.py runserver
-
+```angular2html
+docker run -p 8080:8080 --name app todoapp:2.0.0
+```
 
 Now you can browse the [API](http://localhost:8000/api/)
 or start on the [landing page](http://localhost:8000/)
