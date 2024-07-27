@@ -62,3 +62,24 @@ or start on the [landing page](http://localhost:8000/)
 14. README.md should contain a link to your personal docker hub repository win an app image
 15. README.md should contain instructions on how to access the application via a browser.
 16. Create PR with your changes and attach it for validation on a platform
+
+## Run MySQL container with a volume attached
+
+* The ToDo app image is available on Docker Hub: [todoapp](https://hub.docker.com/repository/docker/abnormaltype/devops-todoapp/general).
+* The MySQL image is available on Docker Hub: [mysql-local](https://hub.docker.com/repository/docker/abnormaltype/mysql-local/general).
+
+### Pull the image from your docker hub repository
+```bash
+docker pull abnormaltype/devops-todoapp:1.0.0
+docker pull abnormaltype/mysql-local:1.0.0
+```
+
+### Run MySQL container with a volume attached
+```bash
+docker run -d -p 3306:3306 --name mysql-local -v mysql-data:/var/lib/mysql abnormaltype/mysql-local:1.0.0
+```
+
+### Run the app container
+```bash
+docker run -d -p 8080:8080 --name todoapp abnormaltype/devops-todoapp:2.0.0
+```
