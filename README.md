@@ -62,3 +62,18 @@ or start on the [landing page](http://localhost:8000/)
 14. README.md should contain a link to your personal docker hub repository win an app image
 15. README.md should contain instructions on how to access the application via a browser.
 16. Create PR with your changes and attach it for validation on a platform
+
+# Solution
+
+[DockerHub Repo](https://hub.docker.com/repository/docker/manjustice/todoapp/general)
+
+## Start containers
+
+```shell
+docker volume create mysql-data
+docker run -d -p 3306:3306 --name mysql -v mysql-data:/var/lib/mysql mysql-local:1.0.0
+docker run -d -p 8080:8080 --name todo-app manjustice/todoapp:2.0.0
+```
+
+## Explore app
+http://127.0.0.1:8080
