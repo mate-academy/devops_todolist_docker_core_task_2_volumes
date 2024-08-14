@@ -62,3 +62,24 @@ or start on the [landing page](http://localhost:8000/)
 14. README.md should contain a link to your personal docker hub repository win an app image
 15. README.md should contain instructions on how to access the application via a browser.
 16. Create PR with your changes and attach it for validation on a platform
+
+
+# link to  personal docker hub repository win an app image
+[mysql-local](https://hub.docker.com/repository/docker/maksimens/todoapp/general)
+[todoapp](https://hub.docker.com/repository/docker/maksimens/mysql-local/general)
+
+#  instructions on how to run an App
+Build the MySQL image: 
+`docker build -f Dockerfile.mysql -t mysql-local:1.0.0 .`
+Run the MySQL container: 
+`docker run -d --name mysql-container -v mysql_data:/var/lib/mysql mysql-local:1.0.0`
+Build the Django application image: 
+`docker build -t todoapp:2.0.0 .`
+Run the Django application container:
+`docker run -d --name todoapp-container --link mysql-container:mysql -p 8080:8080 todoapp:2.0.0`
+you can acces your app on adress: 
+`http://127.0.0.1:8000/`
+
+# Accessing the Application
+
+Open your browser and go to: http://localhost:8080
