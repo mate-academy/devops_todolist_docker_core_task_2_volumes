@@ -62,3 +62,42 @@ or start on the [landing page](http://localhost:8000/)
 14. README.md should contain a link to your personal docker hub repository win an app image
 15. README.md should contain instructions on how to access the application via a browser.
 16. Create PR with your changes and attach it for validation on a platform
+
+
+[//]: # (Update README.md with instructions on how to run MySQL container with a volume attached)
+
+## How to run MySQL container with a volume attached
+
+To run MySQL container with a volume attached, you can use the following commands:
+
+```bash
+docker pull andr1yk/mysql-local:1.0.0
+docker run -d -v mysql-data:/var/lib/mysql --name app-db -p 3306:3306 andr1yk/mysql-local:1.0.0
+```
+
+[//]: # (Update README.md with instructions on how to run an App container which will connect to a MySQL db container.)
+
+## How to run an App container
+
+To run an App container which will connect to a MySQL db container, you can use the following commands:
+
+```bash
+docker pull andr1yk/devops-todoapp:2.0.0
+docker run -d -p 8080:8080 --name app andr1yk/devops-todoapp:2.0.0
+```
+
+[//]: # (README.md should contain a link to your personal docker hub repository win an app image)
+
+## Personal Docker Hub repository
+
+Mysql image: [andr1yk/mysql-local](https://hub.docker.com/r/andr1yk/mysql-local)
+
+App image: [andr1yk/devops-todoapp](https://hub.docker.com/r/andr1yk/devops-todoapp)
+
+[//]: # (README.md should contain instructions on how to access the application via a browser.)
+
+## How to access the application via a browser
+
+To access the application via a browser, you can use the following link:
+
+[http://localhost:8080/](http://localhost:8080/)
