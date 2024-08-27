@@ -1,10 +1,25 @@
 # Django-Todolist
-
 Django-Todolist is a todolist web application with the most basic features of most web apps, i.e. accounts/login, API and (somewhat) interactive UI.
+
+## Running MySQL container with a volume attached
+
+docker run -d --name mysql-local -v my-sql-data:/var/lib/mysql mysql-local:1.0.0
+
+## Running app container connected to a MySQL db container
+
+docker run -p 8080:8080 --name todoapp todoapp:2.0.0
+
 
 ---
 CSS | [Skeleton](http://getskeleton.com/)
 JS  | [jQuery](https://jquery.com/)
+
+## Links to docker hub
+[Todoapp image](https://hub.docker.com/r/nemereno/todoapp2)
+[MySQL image](https://hub.docker.com/r/nemereno/mysql-local)
+
+## Access application via browser
+Open [localhost:8080](http://localhost:8080/) in browser
 
 ## Explore
 Try it out by installing the requirements. (Works only with python >= 3.8, due to Django 4)
