@@ -23,6 +23,20 @@ And then start the server (default: http://localhost:8000)
 Now you can browse the [API](http://localhost:8000/api/)
 or start on the [landing page](http://localhost:8000/)
 
+## How to run the project
+
+#### How to run MySQL container with a volume attached
+To run the mysql container with volume attached execute the next command: docker run -d -p 3306:3306 --name my-mysql -v my-mysql-data:/var/lib/mysql mysql-local:1.0.0
+
+#### How to run the App container which will connect to a MySQL db container
+To run the app execute the next command: docker run -d -p 8080:8080 --name app app:1.0
+
+#### Link to the app on dockerhub
+https://hub.docker.com/repository/docker/codingcloud1/mysql-local/general
+
+#### How to access the application via a browser
+For accessing the application via a browser go to http://localhost:8080
+
 ## Task
 #### Prerequisites
 - Fork this repository
