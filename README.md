@@ -1,64 +1,61 @@
 # Django-Todolist
+This is a simple Django-based To-Do List application built with Docker.
 
-Django-Todolist is a todolist web application with the most basic features of most web apps, i.e. accounts/login, API and (somewhat) interactive UI.
+## Docker Hub Repository
+You can find the Docker images for this application on Docker Hub:
 
----
-CSS | [Skeleton](http://getskeleton.com/)
-JS  | [jQuery](https://jquery.com/)
+https://hub.docker.com/repository/docker/limbx/mysql-local/general
 
-## Explore
-Try it out by installing the requirements. (Works only with python >= 3.8, due to Django 4)
+https://hub.docker.com/repository/docker/limbx/todoapp/general
 
-    pip install -r requirements.txt
+To pull the image from Docker Hub
 
-Create a database schema:
+docker pull limbx/mysql-local:1.0.0
 
-    python manage.py migrate
+docker pull limbx/todoapp:2.0.0
 
-And then start the server (default: http://localhost:8000)
+## GitHub
 
-    python manage.py runserver
+### Clone the Repository
+If you're working with the source code, clone the project repository:
 
+git clone https://github.com/L1mbxbx/devops_todolist_docker_core_task_2_volumes/tree/develop cd devops_todolist
 
-Now you can browse the [API](http://localhost:8000/api/)
-or start on the [landing page](http://localhost:8000/)
+## Building your application
 
-## Task
-#### Prerequisites
-- Fork this repository
-- Open requirements.txt
-- Add mysql-connector-python==8.2.0
-- Open file todolist/settings.py
-- Go to line DATABASES on line 64
-- Update it with this code:
+### Step 1: Building the Docker volume
+If you want to create docker volume to store your data persistantly, run:
 
-    ```
-    DATABASES = {
-        'default': {
-            'ENGINE': 'mysql.connector.django',
-            'NAME': 'app_db',
-            'USER': 'app_user',
-            'PASSWORD': '1234',
-            'HOST': 'localhost',  # You can use a different host in your MySQL server is on a remote machine.
-            'PORT': '',  # Leave this empty to use the default MySQL port (3306).
-        }
-    }
+docker volume create my-mysql-data
 
-    ```
-#### Requirements
-1. Prepare a Dockerfile to run a MySQL database, based on official MySQL Image, name file Dockerfile.mysql
-2. Dockerfile should contain ENV variables to initialize app_db database
-3. Dockerfile should contain ENV variables to initialize app_user with password 1234
-4. Build mysql image with a name and tag mysql-local:1.0.0
-5. You should be able successfully run a container with MySQL with a Volumes Attached
-6. Push mysql-local:1.0.0 to your personal docker hub into mysql-local repository
-7. Run mysql-local:1.0.0 onn your machine
-8. Update the python app db config with an IP of a running MySQL server container (without it, the app container won’t build)
-9. Build and run your updated app
-10. Take a screenshot of a terminal with successfully started application
-11. Push Image with a name and tag: todoapp:2.0.0 to yout Docker Hub repository
-12. Update README.md with instructions on how to run MySQL container with a volume attached
-13. Update README.md with instructions on how to run an App container which will connect to a MySQL db container.
-14. README.md should contain a link to your personal docker hub repository win an app image
-15. README.md should contain instructions on how to access the application via a browser.
-16. Create PR with your changes and attach it for validation on a platform
+### Step 2: Building the Docker Image for database
+If you want to build the Docker image for database, run:
+
+docker build . -f Dockerfile.mysql -t mysql-local:1.0.0
+
+### Step 3: Running the database Docker container
+If you want to run docker container with database, use the following commnad:
+
+docker run -d -p 3306:3306 --name <mysql_db_name> -v my-mysql-data:/var/lib/mysql mysql-local:1.0.0
+
+### Step 4: Building the Docker Image for application
+If you want to build the Docker image for databese, run:
+
+docker build . -f Dockerfile -t todoapp:2.0.0 
+
+### Step 5: Running the application Docker container:
+If you want to run docker container with your application, use the following command:
+
+docker run -d -p 8080:8080 --name <name_of_container> todoapp:2.0.0
+
+## Access the Application in a Browser
+Once the container is running, open a web browser and go to:
+
+http://localhost:8080
+
+## Stoping Containers
+o stop the running container, find the container ID using:
+
+docker ps docker stop <container_id>
+
+Replace <container_id> with the actual container ID.
