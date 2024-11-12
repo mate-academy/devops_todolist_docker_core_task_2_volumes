@@ -20,5 +20,8 @@ RUN pip install --upgrade pip && \
 
 RUN python manage.py migrate
 
+# Expose the Django default port
+EXPOSE 8080
+
 # Run database migrations and start the Django application
-ENTRYPOINT ["python", "manage.py", "runserver", "0.0.0.0:8080"]
+ENTRYPOINT ["python", "manage.py", "runserver", "0.0.0.0:8080", "--noreload"]
