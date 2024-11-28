@@ -1,0 +1,6 @@
+venv/
+*.sqlite
+*.sqlite3
+*.sql
+*.sql.gz
+__pycache__/
