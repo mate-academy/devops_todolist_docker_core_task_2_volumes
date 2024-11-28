@@ -23,6 +23,50 @@ And then start the server (default: http://localhost:8000)
 Now you can browse the [API](http://localhost:8000/api/)
 or start on the [landing page](http://localhost:8000/)
 
+## Docker
+
+### MySQL
+
+Docker image on the Docker Hub: [`andriiky/mysql-local:1.0.0`](https://hub.docker.com/layers/andriiky/mysql-local/1.0.0/images/sha256-2d5104098d30043b23f5da359be832319bb01f6468c909a8267003c102d95e21?context=repo)
+
+Pull the image
+
+```bash
+docker pull andriiky/mysql-local:1.0.0
+```
+
+Create a volume
+
+```bash
+docker volume create mysql-data
+```
+
+Create and start the MySQL container with the attached volume
+
+```bash
+docker run  -d -p 3306:3306 --name mysql-local -v mysql-data:/var/lib/mysql andriiky/mysql-local:1.0.0
+```
+
+### App
+
+Docker image on the Docker Hub: [`andriiky/todoapp:2.0.0`](https://hub.docker.com/layers/andriiky/todoapp/2.0.0/images/sha256-2fc1048b5444c870646526f11be044364ec21a0a62378677ec3eaa3a066a756b?context=repo)
+
+Pull the image
+
+```bash
+docker pull andriiky/todoapp:2.0.0
+```
+
+Change the `HOST` value of the default database to the `IPAddress` found while inspecting the MySQL image (`docker container inspect mysql-local`) in the `devops_todolist_docker_core_task_2_volumes/todolist/settings.py` module.
+
+Create and run the container
+
+```bash
+docker run --name todoadd -p 8080:8080 andriiky/todoapp:2.0.0
+```
+
+Head over to the `http://localhost:8080/` URL to access the webpage.
+
 ## Task
 #### Prerequisites
 - Fork this repository
