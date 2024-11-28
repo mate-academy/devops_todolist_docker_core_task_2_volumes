@@ -1,0 +1,52 @@
+## Enviroment setup
+
+1. **Fork repo.**
+
+2. Update `requirements.txt`** for `mysql-connector-python`:
+
+    ```text
+    mysql-connector-python==8.2.0
+    ```
+
+3. Update settings.py
+
+    ```python
+    DATABASES = {
+        'default': {
+            'ENGINE': 'mysql.connector.django',
+            'NAME': 'app_db',
+            'USER': 'app_user',
+            'PASSWORD': '1234',
+            'HOST': '172.17.0.2',
+            'PORT': '3306',
+        }
+    }
+    ```
+
+## Docker container prep
+
+### 1.  Dockerfile MySQL prep
+
+Create `Dockerfile.mysql` :
+
+```dockerfile
+# Use the official MySQL image from the Docker Hub
+FROM mysql:latest
+
+# Set environment variables
+ENV MYSQL_ROOT_PASSWORD=rootpassword
+ENV MYSQL_DATABASE=app_db
+ENV MYSQL_USER=app_user
+ENV MYSQL_PASSWORD=1234
+
+# Expose the default MySQL port
+EXPOSE 3306
+
+# Create a volume for persistent storage
+VOLUME /var/lib/mysql
+
+My DockerHub linkS
+
+https://hub.docker.com/repository/docker/losiev/todoapp
+
+https://hub.docker.com/repository/docker/losiev/mysql-local
