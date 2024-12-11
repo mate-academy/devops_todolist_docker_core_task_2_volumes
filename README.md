@@ -6,6 +6,22 @@ Django-Todolist is a todo list web application with the most basic features of m
 CSS | [Skeleton](http://getskeleton.com/)
 JS  | [jQuery](https://jquery.com/)
 
+## Magic in box
+### ~ First step - Launch SQL ~
+
+
+Create container with mySQL database and create volume “app-data” with path in container “/var/lib/mysql” :
+
+#### docker run --name app-sql-volume -p 3306:3306 -d -v app-data:/var/lib/mysql trinida/my-sql:1.0.0
+### ~ Second step - WEB Application ~
+
+Create container with web application “todoapp” :
+#### docker run -d -p 8080:8080 --name todoapp-2.0.0 trinida/todoapp:2.0.0
+## [~ My repo ~](https://hub.docker.com/r/trinida)
+##  [~ call application ~](http://127.0.0.1:8080)
+##  [~ how it work ~](./working_app.png)
+
+
 ## Explore
 Try it out by installing the requirements. (Works only with Python >= 3.8, due to Django 4)
 
