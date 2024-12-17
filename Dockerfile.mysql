@@ -1,0 +1,7 @@
+FROM mysql:latest
+
+ENV MYSQL_DATABASE=app_db
+
+EXPOSE 3306
+
+VOLUME /var/lib/mysql
