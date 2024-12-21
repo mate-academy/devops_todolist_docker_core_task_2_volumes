@@ -9,6 +9,15 @@
 ### Build the Docker Image
 To build the Docker image, run the following command:
 ```bash
-docker build . -f Dockerfile.mysql -t my-sql:1.0; docker run -d -p 3306:3306 --name my-mysql -v my-mysql-data:/var/lib/mysql my-sql:1.0; docker build . -f Dockerfile -t app:1.0; docker run -p 8080:8080 --name app app:1.0
+# Run App container
+docker run -p 8080:8080 --name app app:1.0
 
+# Build App image
+docker build . -f Dockerfile -t app:1.0
+
+# Run MySQL container
+docker run -d -p 3306:3306 --name my-mysql -v my-mysql-data:/var/lib/mysql my-sql:1.0
+
+# Build MySQL image
+docker build . -f Dockerfile.mysql -t my-sql:1.0
 
