@@ -15,10 +15,19 @@ ENV PYTHONUNBUFFERED=1
 
 COPY --from=builder /app .
 
+# Install dependencies
 RUN pip install --upgrade pip && \
     pip install -r requirements.txt
 
-RUN python manage.py migrate
+# Set environment variables for sensitive data
+ENV DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
+ENV DB_HOST=${DB_HOST}
+ENV DB_NAME=${DB_NAME}
+ENV DB_USER=${DB_USER}
+ENV DB_PASSWORD=${DB_PASSWORD}
 
-# Run database migrations and start the Django application
-ENTRYPOINT ["python", "manage.py", "runserver", "0.0.0.0:8080"]
+# Expose the Django app port
+EXPOSE 8000
+
+# Command to start the Django application
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
