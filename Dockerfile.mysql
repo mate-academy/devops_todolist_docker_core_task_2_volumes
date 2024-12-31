@@ -1,0 +1,8 @@
+# Используем официальный образ MySQL
+FROM mysql:8.0
+
+# Указываем рабочую директорию (опционально)
+WORKDIR /docker-entrypoint-initdb.d
+
+# Завершаем Dockerfile
+EXPOSE 3306

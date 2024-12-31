@@ -18,7 +18,12 @@ COPY --from=builder /app .
 RUN pip install --upgrade pip && \
     pip install -r requirements.txt
 
-RUN python manage.py migrate
+# Use .env for environment variables
+ARG ENV_FILE_PATH=.env
+ENV ENV_FILE=${ENV_FILE_PATH}
+
+# RUN python manage.py migrate
 
 # Run database migrations and start the Django application
-ENTRYPOINT ["python", "manage.py", "runserver", "0.0.0.0:8080"]
+# ENTRYPOINT ["python", "manage.py", "runserver", "0.0.0.0:8080"]
+ENTRYPOINT ["sh", "-c", "python manage.py migrate && python manage.py runserver 0.0.0.0:8080"]
