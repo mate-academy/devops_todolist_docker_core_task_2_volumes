@@ -60,21 +60,15 @@ WSGI_APPLICATION = "todolist.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
-
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+    'default': {
+        'ENGINE': 'mysql.connector.django',
+        'NAME': 'app_db',
+        'USER': 'app_user',
+        'PASSWORD': '1234',
+        'HOST': 'mysql-container',  # Имя контейнера MySQL
+        'PORT': '3306',  # Стандартный порт MySQL
     }
-
-    # "default": {
-    #     "ENGINE": "django.db.backends.mysql",
-    #     "HOST": "FVFFM3F5Q05N", 
-    #     "PORT": 3306,
-    #     "NAME":"tododb",
-    #     "PASSWORD": "my-secret-pw", 
-    #     "USER": "root",
-    # }
 }
 
 # Internationalization

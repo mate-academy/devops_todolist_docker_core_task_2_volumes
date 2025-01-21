@@ -1,0 +1,10 @@
+FROM mysql:8.0
+
+# Установка переменных окружения для инициализации базы данных
+ENV MYSQL_DATABASE=app_db
+ENV MYSQL_USER=app_user
+ENV MYSQL_PASSWORD=1234
+ENV MYSQL_ROOT_PASSWORD=rootpassword
+
+# Указываем директорию для хранения данных MySQL
+VOLUME /var/lib/mysql

@@ -2,7 +2,6 @@
 ARG PYTHON_VERSION=3.8
 FROM python:${PYTHON_VERSION} as builder
 
-# Set the working directory
 WORKDIR /app
 COPY . .
 
@@ -18,7 +17,8 @@ COPY --from=builder /app .
 RUN pip install --upgrade pip && \
     pip install -r requirements.txt
 
-RUN python manage.py migrate
+# Установка утилиты wait-for-it
+RUN apt-get update && apt-get install -y wait-for-it
 
-# Run database migrations and start the Django application
-ENTRYPOINT ["python", "manage.py", "runserver", "0.0.0.0:8080"]
+# Команда запуска
+CMD ["sh", "-c", "wait-for-it mysql-container:3306 -- python manage.py migrate && python manage.py runserver 0.0.0.0:8080"]
