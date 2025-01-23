@@ -7,7 +7,7 @@ CSS | [Skeleton](http://getskeleton.com/)
 JS  | [jQuery](https://jquery.com/)
 
 ## Explore
-Try it out by installing the requirements. (Works only with Python >= 3.8, due to Django 4)
+Try it out by installing the  requirements. (Works only with Python >= 3.8, due to Django 4)
 
     pip install -r requirements.txt
 
@@ -63,3 +63,25 @@ or start on the [landing page](http://localhost:8000/)
 15. `INSTRUCTION.md` should contain a link to your personal docker hub repository win an app image
 16. `INSTRUCTION.md` should contain instructions on how to access the application via a browser.
 17. Create PR with your changes and attach it for validation on a platform
+
+
+
+## How to run MySQL container 
+
+```
+docker pull bohdanfsd/mysql-local
+docker run  -d -p 3306:3306 --name my-mysql -v my-mysql-data:/var/lib/mysql mysql-local:1.0.0
+```
+
+## To start app
+
+```
+docker pull bohdanfsd/todoapp
+docker run -p 8080:8080 --name todoapp todoapp:2.0.0
+```
+
+## Check server
+
+```
+ http://0.0.0.0:8080/
+ ```
