@@ -61,11 +61,24 @@ WSGI_APPLICATION = "todolist.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
+import os
+from dotenv import load_dotenv
+
+# Завантажуємо змінні з файлу .env
+load_dotenv()
+
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT', default=3306, cast=int),
     }
+}
+
+
 
     # "default": {
     #     "ENGINE": "django.db.backends.mysql",
@@ -75,7 +88,6 @@ DATABASES = {
     #     "PASSWORD": "my-secret-pw", 
     #     "USER": "root",
     # }
-}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
