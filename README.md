@@ -51,7 +51,7 @@ or start on the [landing page](http://localhost:8000/)
 3. Dockerfile should contain ENV variables to initialize app_user with password `1234`
 4. Build mysql image with a name and tag mysql-local:1.0.0
 5. You should be able to successfully run a container with MySQL with Volumes Attached
-6. Push mysql-local:1.0.0 to your personal docker hub into mysql-local repository
+6. Push to your personal docker hub into mysql-local repository
 7. Run mysql-local:1.0.0 on your machine
 8. Update the Python app db config with an IP of a running MySQL server container (without it, the app container won’t build)
 9. Build and run your updated app
