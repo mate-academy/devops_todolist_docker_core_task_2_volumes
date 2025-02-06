@@ -1,0 +1,16 @@
+FROM mysql:latest
+
+# Environment variables for MySQL configuration
+ENV MYSQL_DATABASE=${MYSQL_DATABASE}
+ENV MYSQL_USER=${MYSQL_USER}
+ENV MYSQL_PASSWORD=${MYSQL_PASSWORD}
+ENV MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+
+# Expose port 3306 for MySQL connections
+EXPOSE 3306
+
+# Set the data directory as a volume
+VOLUME /var/lib/mysql
+
+# Copy SQL initialization script to set up the database and user
+COPY init.sql /docker-entrypoint-initdb.d/
