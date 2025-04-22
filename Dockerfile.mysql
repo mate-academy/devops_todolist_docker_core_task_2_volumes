@@ -1,0 +1,16 @@
+FROM mysql:8.0
+
+# Environment variables for MySQL configuration
+ENV MYSQL_DATABASE=app_db
+ENV MYSQL_USER=app_user
+ENV MYSQL_PASSWORD=1234
+ENV MYSQL_ROOT_PASSWORD=root
+
+# Create a volume for persistent data
+VOLUME /var/lib/mysql
+
+# Expose MySQL port
+EXPOSE 3306
+
+# Start MySQL server
+CMD ["mysqld"]
