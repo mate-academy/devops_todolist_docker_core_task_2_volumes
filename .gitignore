@@ -1,0 +1,65 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django stuff:
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+db.sqlite3
+media/
+staticfiles/
+
+# If using Django's collectstatic
+/static/
+
+# PyCharm project settings
+.idea/
+
+# Python virtual environment
+venv/
+.env/
+.envrc
+*.env
+
+# VSCode settings (if ever used)
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# pytest
+.cache/
+.pytest_cache/
+
+# coverage reports
+htmlcov/
+.coverage
+coverage.xml
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# pip
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+junit.xml
+nosetests.xml
+test-results.xml
+*.cover
+*.py,cover
+
+# Others
+*.swp
+*.swo
+*.bak
+*.tmp
