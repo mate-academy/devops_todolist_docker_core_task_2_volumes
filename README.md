@@ -6,60 +6,45 @@ Django-Todolist is a todo list web application with the most basic features of m
 CSS | [Skeleton](http://getskeleton.com/)
 JS  | [jQuery](https://jquery.com/)
 
-## Explore
-Try it out by installing the requirements. (Works only with Python >= 3.8, due to Django 4)
 
-    pip install -r requirements.txt
+DockerHub link: 
+```
+https://hub.docker.com/repository/docker/workpolly/todoapp/tags/2.0.0/sha256-427375867e95c7b00230b1c5c6b3416613d58ea4718230dd2d155a408b09496c?tab=layers
+```
 
-Create a database schema:
+## Running from GitHub
 
-    python manage.py migrate
+1. To clone the app navigate to your projects folder and run:
 
-And then start the server (default: http://localhost:8000)
+```
+git clone [<repo link>](https://github.com/panik10/devops_todolist_docker_core_task_2_volumes.git)
+```
+2. Navigate to app folder:
+```
+cd todoapp
+```
+3. Build the mysql database with command:
+```
+docker build . -t mysql-local:1.0.0 -f Dockerfile.mysql
+```
+4. Run the sql server with:
+```
+docker run --name mysql_instance -p 3306:3306 -d mysql-local
+```
+5. With command docker network inspect find the container's IP V4 address and copy it:
+```
+docker network inspect bridge | grep mysql -A 4
+```
+6. In the settings file todolist/settings.py navigate to the line 70 and paste the IP address from previous step
 
-    python manage.py runserver
+7. Then navigate to the app folder and use the following command to build the image locally:
+```
+docker build . -t todoapp:1.0.0
+```
+8. To run created container use next command:
+```
+docker run -p 8080:8080 --name todoapp todoapp:1.0.0
+```
+9. Connect to the server using your browser http://127.0.0.1:8080/ 
 
-
-Now you can browse the [API](http://localhost:8000/api/)
-or start on the [landing page](http://localhost:8000/)
-
-## Task
-#### Prerequisites
-- Fork this repository
-- Open requirements.txt
-- Add mysql-connector-python==8.2.0
-- Open file todolist/settings.py
-- Go to line DATABASES on line 64
-- Update it with this code:
-
-    ```
-    DATABASES = {
-        'default': {
-            'ENGINE': 'mysql.connector.django',
-            'NAME': 'app_db',
-            'USER': 'app_user',
-            'PASSWORD': '1234',
-            'HOST': 'localhost',  # You can use a different host in your MySQL server is on a remote machine.
-            'PORT': '',  # Leave this empty to use the default MySQL port (3306).
-        }
-    }
-
-    ```
-#### Requirements
-1. Prepare a Dockerfile to run a MySQL database, based on the official MySQL Image, name file `Dockerfile.mysql`
-2. Dockerfile should contain ENV variables to initialize the app_db database
-3. Dockerfile should contain ENV variables to initialize app_user with password `1234`
-4. Build mysql image with a name and tag mysql-local:1.0.0
-5. You should be able to successfully run a container with MySQL with Volumes Attached
-6. Push mysql-local:1.0.0 to your personal docker hub into mysql-local repository
-7. Run mysql-local:1.0.0 on your machine
-8. Update the Python app db config with an IP of a running MySQL server container (without it, the app container won’t build)
-9. Build and run your updated app
-10. Take a screenshot of a terminal with a successfully started application
-11. Push the Image with a name and tag: todoapp:2.0.0 to your Docker Hub repository
-12. Create the `INSTRUCTION.md` file
-13. Update `INSTRUCTION.md` with instructions on how to run MySQL container with a volume attached
-14. Update `INSTRUCTION.md` with instructions on how to run an App container which will connect to a MySQL db container.
-15. `INSTRUCTION.md` should contain a link to your personal docker hub repository win an app image
-16. `INSTRUCTION.md` should contain instructions on how to access the application via a browser.
-17. Create PR with your changes and attach it for validation on a platform
+    You can change the port by altering -p tag like "-p 80:8080" will map port 80 to your app 
