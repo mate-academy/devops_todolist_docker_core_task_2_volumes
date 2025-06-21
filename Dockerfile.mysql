@@ -1,0 +1,10 @@
+# Використовуємо офіційний образ MySQL
+FROM mysql:8.0
+
+# Встановлюємо змінні середовища для налаштування бази даних
+# Ці змінні будуть використані скриптом ініціалізації MySQL при першому запуску
+ENV MYSQL_DATABASE=app_db
+ENV MYSQL_USER=app_user
+ENV MYSQL_PASSWORD=1234
+# Пароль для root користувача (опціонально, але рекомендовано)
+ENV MYSQL_ROOT_PASSWORD=root_password
