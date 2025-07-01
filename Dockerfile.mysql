@@ -1,0 +1,14 @@
+# Use the official MySQL image as base
+FROM mysql:8.0
+
+# Set environment variables to initialize the database
+ENV MYSQL_ROOT_PASSWORD=root_password
+ENV MYSQL_DATABASE=app_db
+ENV MYSQL_USER=app_user
+ENV MYSQL_PASSWORD=1234
+
+# Expose the MySQL port
+EXPOSE 3306
+
+# Create a volume for MySQL data persistence
+VOLUME ["/var/lib/mysql"]
