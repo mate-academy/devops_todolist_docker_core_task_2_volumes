@@ -1,0 +1,12 @@
+# syntax=docker/dockerfile:1
+
+FROM mysql:latest
+
+# Створюємо базу даних `app_db`, користувача `app_user` з паролем `1234`, root пароль — `root`
+ENV MYSQL_DATABASE=app_db \
+    MYSQL_USER=app_user \
+    MYSQL_PASSWORD=1234 \
+    MYSQL_ROOT_PASSWORD=root
+
+# Відкриваємо порт 3306 (порт MySQL)
+EXPOSE 3306
