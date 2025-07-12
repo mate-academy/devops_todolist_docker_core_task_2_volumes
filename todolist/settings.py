@@ -74,6 +74,7 @@ DATABASES = {
     #     "NAME":"tododb",
     #     "PASSWORD": "my-secret-pw", 
     #     "USER": "root",
+    #     "HOST": "172.17.0.2",
     # }
 }
 
