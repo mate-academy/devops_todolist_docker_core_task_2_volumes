@@ -1,0 +1,14 @@
+# nameDockerfile.mysql
+FROM mysql:8.0
+
+# Ініціалізація бази та користувача
+ENV MYSQL_ROOT_PASSWORD=rootpass
+ENV MYSQL_DATABASE=app_db
+ENV MYSQL_USER=app_user
+ENV MYSQL_PASSWORD=1234
+
+# Виставляємо порт і стандартний том
+EXPOSE 3306
+VOLUME ["/var/lib/mysql"]
+
+# Nothing else needed: офіційний entrypoint ініціалізує БД з ENV
