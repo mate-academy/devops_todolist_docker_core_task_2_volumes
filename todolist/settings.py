@@ -69,7 +69,7 @@ DATABASES = {
         'USER': 'app_user',
         'PASSWORD': '1234',
         'HOST': '172.18.0.2',  # <-- тут IP контейнера mysql-local
-        'PORT': '3306',
+        'PORT': '',
         'OPTIONS': {
             'charset': 'utf8mb4',
         }
