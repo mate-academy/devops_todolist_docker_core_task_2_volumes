@@ -1,0 +1,76 @@
+# === ОС та системні файли ===
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# === Python ===
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pdb
+*.egg
+*.egg-info/
+*.manifest
+*.spec
+*.log
+.env
+.venv/
+venv/
+env/
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+
+# === IDE/Editor ===
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*~
+
+# === OS generated ===
+ehthumbs.db
+Icon?
+._*
+
+# === Build / Dist ===
+build/
+dist/
+target/
+out/
+*.lock
+*.bak
+*.tmp
+*.temp
+
+# === Coverage / Testing ===
+.coverage
+coverage/
+htmlcov/
+.tox/
+nosetests.xml
+test-results/
+pytest_cache/
+
+# === Docker ===
+*.pid
+*.seed
+*.pid.lock
+
+# === Logs ===
+*.log
+logs/
+*.out
+*.err
+
+# === Misc ===
+*.sqlite3
+*.db
+*.tar.gz
+*.zip
+*.7z
+*.rar
