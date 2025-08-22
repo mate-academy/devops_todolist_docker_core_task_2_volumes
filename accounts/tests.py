@@ -153,7 +153,7 @@ class RegistrationFormTests(TestCase):
             "password_confirmation": "test2",
         }
 
-    # some tests can be skipped because of the coverage of LoginFormTests
+    # some test_lists can be skipped because of the coverage of LoginFormTests
     def test_valid_input(self):
         form = RegistrationForm(self.valid_form_data)
         self.assertTrue(form.is_valid())
