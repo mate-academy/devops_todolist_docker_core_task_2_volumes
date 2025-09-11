@@ -62,9 +62,13 @@ WSGI_APPLICATION = "todolist.wsgi.application"
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+    'default': {
+        'ENGINE': 'mysql.connector.django',
+        'NAME': os.environ.get('MYSQL_DATABASE', 'app_db'),
+        'USER': os.environ.get('MYSQL_USER', 'app_user'),
+        'PASSWORD': os.environ.get('MYSQL_PASSWORD', '1234'),
+        'HOST': os.environ.get('MYSQL_HOST', '172.17.0.2'),
+        'PORT': os.environ.get('MYSQL_PORT', ''),
     }
 
     # "default": {
