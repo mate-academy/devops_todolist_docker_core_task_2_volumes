@@ -1,5 +1,18 @@
 # INSTRUCTION
 
+## Build and push MySQL image
+```
+docker build -f -t Dockerfile.mysql rmarianna/mysql-local:1.0.0 .
+docker push rmarianna/mysql-local:1.0.0
+```
+
+## Build and push App image
+```
+docker build -t rmarianna/todoapp:2.0.0 .
+docker push rmarianna/todoapp:2.0.0
+
+```
+
 ## Run MySQL container with a volume attached
 ```
 docker run --name mysql-volume -p 3306:3306 -d -v mysql-data:/var/lib/mysql rmarianna/mysql-local:1.0.0
