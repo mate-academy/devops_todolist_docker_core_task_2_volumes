@@ -11,6 +11,9 @@ FROM python:${PYTHON_VERSION} as run
 
 WORKDIR /app
 
+ARG DB_HOST
+ENV DB_HOST=${DB_HOST}
+
 ENV PYTHONUNBUFFERED=1
 
 COPY --from=builder /app .
