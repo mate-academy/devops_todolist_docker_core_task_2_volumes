@@ -1,64 +1,101 @@
 # TodoList Application - Прості інструкції
 
-## Q: Як запустити MySQL контейнер з об'ємом?
+## Q: Як створити том для MySQL?
 
-**A:** Виконайте цю команду:
-
+**A:** Спочатку створіть том:
 ```bash
-docker run -d -p 3306:3306 --name my-mysql -v my-mysql-data:/var/lib/mysql mysql-local:1.0.0
+docker volume create my-mysql-data
 ```
 
-## Q: Як перевірити, що MySQL працює?
+## Q: Як зібрати образи MySQL та додатку?
+
+**A:** Зберіть обидва образи з правильними тегами:
+
+```bash
+# Зібрати MySQL образ
+docker build -t <username>/mysql-local:1.0.0 -f Dockerfile.mysql .
+
+# Зібрати образ додатку
+docker build -t <username>/todoapp:2.0.0 .
+```
+
+## Q: Як опублікувати образи на Docker Hub?
+
+**A:**
+```bash
+# Push MySQL образ
+docker push <username>/mysql-local:1.0.0
+
+# Push образ додатку
+docker push <username>/todoapp:2.0.0
+```
+
+## Q: Як завантажити готові образи з Docker Hub?
+
+**A:**
+```bash
+# Завантажити MySQL образ
+docker pull <username>/mysql-local:1.0.0
+
+# Завантажити образ додатку
+docker pull <username>/todoapp:2.0.0
+```
+
+## Q: Як створити мережу для контейнерів?
+
+**A:**
+```bash
+docker network create todonet
+```
+
+## Q: Як запустити MySQL контейнер з об'ємом?
+
+**A:**
+```bash
+docker run -d --network todonet --name my-mysql -v my-mysql-data:/var/lib/mysql <username>/mysql-local:1.0.0
+```
+
+## Q: Як запустити додаток, який підключається до MySQL?
+
+**A:**
+```bash
+docker run -d --network todonet --name todoapp -p 8000:8000 -e MYSQL_HOST=my-mysql <username>/todoapp:2.0.0
+```
+
+## Q: Як відкрити додаток у браузері?
+
+**A:** Перейдіть за адресою: **http://localhost:8000**
+
+## Q: Як перевірити, що все працює?
 
 **A:** 
 ```bash
 docker ps
 docker logs my-mysql
+docker logs todoapp
 ```
 
-## Q: Як запустити додаток, який підключається до MySQL?
+## Q: Що робити, якщо збирали локально без імені користувача?
 
-**A:** Спочатку знайдіть IP MySQL контейнера:
+**A:** Використайте docker tag:
 ```bash
-docker inspect my-mysql | grep IPAddress
+docker tag mysql-local:1.0.0 <username>/mysql-local:1.0.0
+docker tag todoapp:2.0.0 <username>/todoapp:2.0.0
 ```
-
-Потім запустіть додаток:
-```bash
-docker run -d --name todolist-app -p 8080:8080 --link my-mysql:mysql todolist-app:latest
-```
-
-## Q: Як зібрати образ додатку?
-
-**A:**
-```bash
-docker build -t todolist-app:latest .
-```
-
-## Q: Де знайти готовий образ на Docker Hub?
-
-**A:** https://hub.docker.com/r/[ВАШЕ_ІМ'Я]/todolist-app
-
-Або встановити:
-```bash
-docker pull [ВАШЕ_ІМ'Я]/todolist-app:latest
-```
-
-## Q: Як відкрити додаток у браузері?
-
-**A:** Перейдіть за адресою: **http://localhost:8080**
 
 ## Q: Як зупинити все?
 
 **A:**
 ```bash
-docker stop todolist-app my-mysql
-docker rm todolist-app my-mysql
+docker stop todoapp my-mysql
+docker rm todoapp my-mysql
+docker network rm todonet
 ```
 
 ## Q: Що робити, якщо не працює?
 
 **A:** 
 1. Перевірте статус: `docker ps`
-2. Подивіться логи: `docker logs todolist-app`
+2. Подивіться логи: `docker logs todoapp`
 3. Переконайтеся, що MySQL запущений: `docker logs my-mysql`
+4. Перевірте мережу: `docker network ls`
