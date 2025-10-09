@@ -1,0 +1,16 @@
+FROM mysql:8.0.35
+
+# Environment variables for MySQL configuration
+ENV MYSQL_DATABASE=app_db
+ENV MYSQL_USER=app_user
+ENV MYSQL_PASSWORD=1234
+ENV MYSQL_ROOT_PASSWORD=admin123
+
+# Expose MySQL port
+EXPOSE 3306
+
+# Create volume for persistent data
+VOLUME /var/lib/mysql
+
+# Copy SQL initialization script to set up the database and user
+COPY init.sql /docker-entrypoint-initdb.d/
