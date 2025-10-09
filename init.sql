@@ -1,6 +1,6 @@
--- Grant privileges to the app_user (created by MYSQL_USER env var)
-GRANT ALL PRIVILEGES ON app_db.* TO 'app_user'@'%';
-FLUSH PRIVILEGES;
+-- Create the database if it doesn't exist
+CREATE DATABASE IF NOT EXISTS app_db;
+
 
 -- Use the 'app_db' database
 USE app_db;
