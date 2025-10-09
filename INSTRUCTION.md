@@ -13,10 +13,10 @@ docker volume create my-mysql-data
 
 ```bash
 # Зібрати MySQL образ
-docker build -t <username>/mysql-local:1.0.0 -f Dockerfile.mysql .
+docker build -t demops096/mysql-local:1.0.0 -f Dockerfile.mysql .
 
 # Зібрати образ додатку
-docker build -t <username>/todoapp:2.0.0 .
+docker build -t demops096/todoapp:2.0.0 .
 ```
 
 ## Q: Як опублікувати образи на Docker Hub?
@@ -24,10 +24,10 @@ docker build -t <username>/todoapp:2.0.0 .
 **A:**
 ```bash
 # Push MySQL образ
-docker push <username>/mysql-local:1.0.0
+docker push demops096/mysql-local:1.0.0
 
 # Push образ додатку
-docker push <username>/todoapp:2.0.0
+docker push demops096/todoapp:2.0.0
 ```
 
 ## Q: Як завантажити готові образи з Docker Hub?
@@ -35,10 +35,10 @@ docker push <username>/todoapp:2.0.0
 **A:**
 ```bash
 # Завантажити MySQL образ
-docker pull <username>/mysql-local:1.0.0
+docker pull demops096/mysql-local:1.0.0
 
 # Завантажити образ додатку
-docker pull <username>/todoapp:2.0.0
+docker pull demops096/todoapp:2.0.0
 ```
 
 ## Q: Як створити мережу для контейнерів?
@@ -79,8 +79,8 @@ docker logs todoapp
 
 **A:** Використайте docker tag:
 ```bash
-docker tag mysql-local:1.0.0 <username>/mysql-local:1.0.0
-docker tag todoapp:2.0.0 <username>/todoapp:2.0.0
+docker tag mysql-local:1.0.0 demops096/mysql-local:1.0.0
+docker tag todoapp:2.0.0 demops096/todoapp:2.0.0
 ```
 
 ## Q: Як зупинити все?
