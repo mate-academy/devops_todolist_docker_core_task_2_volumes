@@ -1,9 +1,14 @@
 ToDo App — Docker Instructions
 Repository Links
 
-ToDo: https://hub.docker.com/repository/docker/spridoloba/todoapp/
+ToDo: https://hub.docker.com/repository/docker/yourname/todoapp/
 
-Mysql-local: https://hub.docker.com/repository/docker/spridoloba/mysql-local/
+Mysql-local: https://hub.docker.com/repository/docker/yourname/mysql-local/
+
+
+Be sure to check requirements.txt for the presence of:
+mysql-connector-python==8.2.0
+
 
 MySQL Configuration
 
@@ -28,16 +33,16 @@ docker build . -f Dockerfile -t todoapp:2.0.0
 
 Tag and Push Images
 MySQL:
-docker tag mysql-local:1.0.0 spridoloba/mysql-local:1.0.0
-docker push spridoloba/mysql-local:1.0.0
+docker tag mysql-local:1.0.0 yourname/mysql-local:1.0.0
+docker push yourname/mysql-local:1.0.0
 
 ToDo App:
-docker tag todoapp:2.0.0 spridoloba/todoapp:2.0.0
-docker push spridoloba/todoapp:2.0.0
+docker tag todoapp:2.0.0 yourname/todoapp:2.0.0
+docker push yourname/todoapp:2.0.0
 
 Pull Images from Docker Hub:
-docker pull spridoloba/mysql-local:1.0.0
-docker pull spridoloba/todoapp:2.0.0
+docker pull yourname/mysql-local:1.0.0
+docker pull yourname/todoapp:2.0.0
 
 Create Docker Network
 
@@ -50,7 +55,7 @@ docker run -d --name mysql-local \
   --network todonet \
   -p 3306:3306 \
   -v my-mysql-data:/var/lib/mysql \
-  spridoloba/mysql-local:1.0.0
+  yourname/mysql-local:1.0.0
 
 
 If you didn’t modify todolist/settings.py, keep the default port 3306.
@@ -75,3 +80,7 @@ Database Backend
 The application now uses MySQL by default.
 If needed, adjust connection parameters in todolist/settings.py before building.
 SQLite remains supported only for legacy builds prior to v2.0.0.
+
+
+
+https://ibb.co/sdrvG3TS   - screenshot showing the Django server started 
