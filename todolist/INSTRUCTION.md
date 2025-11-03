@@ -10,7 +10,7 @@
     ```bash
     docker run -d --name my-sql-db -p 3306:3306 \
       -v mysql_data:/var/lib/mysql \
-      YOUR_DOCKERHUB_USERNAME/mysql-local:1.0.0
+      172.17.0.2/mysql-local:1.0.0
     ```
 
 ## 2. Запуск Додатку (Todo App)
