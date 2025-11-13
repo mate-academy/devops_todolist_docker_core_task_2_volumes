@@ -1,24 +1,25 @@
-# Stage 1: Build Stage
-ARG PYTHON_VERSION=3.8
-FROM python:${PYTHON_VERSION} as builder
+ARG PY_BASE=3.11-slim
 
-# Set the working directory
+# --- build stage ---
+FROM python:${PY_BASE} AS build
 WORKDIR /app
+COPY requirements.txt .
+RUN pip install --upgrade pip \
+ && pip wheel --wheel-dir=/wheels -r requirements.txt
+
+# --- run stage ---
+FROM python:${PY_BASE}
+ENV PYTHONUNBUFFERED=1
+WORKDIR /app
+
+COPY --from=build /wheels /wheels
+RUN pip install --no-index --find-links=/wheels /wheels/*
+
 COPY . .
 
-# Stage 2: Run Stage
-FROM python:${PYTHON_VERSION} as run
+# entrypoint
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
-WORKDIR /app
-
-ENV PYTHONUNBUFFERED=1
-
-COPY --from=builder /app .
-
-RUN pip install --upgrade pip && \
-    pip install -r requirements.txt
-
-RUN python manage.py migrate
-
-# Run database migrations and start the Django application
-ENTRYPOINT ["python", "manage.py", "runserver", "0.0.0.0:8080"]
+EXPOSE 8080
+ENTRYPOINT ["docker-entrypoint.sh"]
