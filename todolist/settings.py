@@ -63,8 +63,13 @@ WSGI_APPLICATION = "todolist.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+        'ENGINE': 'mysql.connector.django',
+        'NAME': 'app_db',
+        'USER': 'app_user',
+        'PASSWORD': '1234',
+        # When running in containers, set DB_HOST to the MySQL container name or IP
+        'HOST': os.environ.get('DB_HOST', 'localhost'),
+        'PORT': '',  # Leave this empty to use the default MySQL port (3306).
     }
 
     # "default": {
