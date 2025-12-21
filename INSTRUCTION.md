@@ -1,13 +1,12 @@
 ## how to run MySQL container with a volume attached
 
-# Docker volume is created automatically with official mysql:8.0 image when running a container
 
 # if builded and run locally
 docker build -f Dockerfile.mysql -t mysql-local:1.0.0 .
-docker run -d -p 3306:3306 --name my-sql-server mysql-local:1.0.0
+docker run -d -p 3306:3306 -v mysql-dev:/var/lib/mysql --name my-sql-server mysql-local:1.0.0
 
 # remote run
-docker run -d -p 3306:3306 --name my-sql-server sydor101/mysql-local:1.0.0
+docker run -d -p 3306:3306 -v mysql-dev:/var/lib/mysql --name my-sql-server sydor101/mysql-local:1.0.0
 
 ## how to run an App container which will connect to a MySQL db container
 1. Run the MySQL db container
