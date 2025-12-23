@@ -15,10 +15,10 @@ A key modification was made to the todolist/settings.py file, where the DATABASE
 ### Connecting App to MySQL
 To connect the application to the database:
 1. Build the todoapp image:
-`docker build . -f Dockerfile -t mysql-app:1.0.0`
+`docker build . -f Dockerfile -t todoapp:2.0.0`
 
 2. Run the container with a volume:
-`docker run -d --name todoapp --network mysql -p 8080:8080 mysql-app:1.0.0`
+`docker run -d --name todoapp --network mysql -p 8080:8080 todoapp:2.0.0`
 
 3. After starting the app container, run migrations to initialize the database:
    `docker exec todoapp python manage.py migrate`
