@@ -1,0 +1,5 @@
+GRANT ALL PRIVILEGES ON app_db.* TO 'app_user'@'%';
+
+FLUSH PRIVILEGES;
+
+USE app_db;
