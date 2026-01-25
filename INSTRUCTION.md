@@ -22,9 +22,7 @@
 ## Accessing the Application
 
 1. Open your browser and navigate to:
-   ```
-   http://localhost:8000
-   ```
+   http://localhost:8080
 
 ## Docker Hub Repositories
 
