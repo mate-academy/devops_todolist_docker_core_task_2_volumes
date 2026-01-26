@@ -1,0 +1,30 @@
+# Віртуальне оточення (це найважливіше, воно важить багато і не спрацює всередині Linux)
+.venv
+venv
+ENV
+
+# База даних (щоб у кожного нового образу була своя чиста база)
+*.sqlite3
+
+# Git та налаштування репозиторію
+.git
+.gitignore
+.github
+.travis.yml
+.pre-commit-config.yaml
+
+# Налаштування IDE (PyCharm/VSCode)
+.idea
+.vscode
+
+# Кеш Python
+**/__pycache__
+*.pyc
+*.pyo
+*.pyd
+
+# Інше
+Dockerfile
+.dockerignore
+LICENSE
+README.md
