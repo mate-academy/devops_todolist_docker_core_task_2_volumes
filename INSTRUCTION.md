@@ -7,9 +7,19 @@
 
 ---
 
-## 1. Run MySQL container with a volume attached
+## 1. Create Docker network
 
-### Pull or build MySQL image
+Create a shared Docker network so containers can communicate using container names:
+
+```bash
+docker network create todo-network
+```
+
+---
+
+## 2. Run MySQL container with a volume attached
+
+### Pull MySQL image
 
 ```bash
 docker pull yaroslapelenychka/mysql-local:1.0.0
@@ -20,6 +30,7 @@ docker pull yaroslapelenychka/mysql-local:1.0.0
 ```bash
 docker run -d \
   --name mysql-db \
+  --network todo-network \
   -p 3306:3306 \
   -v mysql_data:/var/lib/mysql \
   yaroslapelenychka/mysql-local:1.0.0
@@ -30,7 +41,7 @@ docker run -d \
 - **Database:** `app_db`
 - **User:** `app_user`
 - **Password:** `1234`
-- **Host:** `127.0.0.1`
+- **Host:** `mysql-db`
 - **Port:** `3306`
 
 ### Verify MySQL is running
@@ -41,7 +52,7 @@ docker exec -it mysql-db mysql -uapp_user -p1234 -D app_db -e "SELECT 1;"
 
 ---
 
-## 2. Run Django application container
+## 3. Run Django application container
 
 ### Pull application image
 
@@ -54,39 +65,39 @@ docker pull yaroslapelenychka/todoapp:2.0.0
 ```bash
 docker run -d \
   --name todoapp \
+  --network todo-network \
   -p 8080:8080 \
   yaroslapelenychka/todoapp:2.0.0
 ```
 
-> ⚠️ The application is configured to connect to the MySQL database using the host IP of the running MySQL container.
+> The application connects to the MySQL database using the container name `mysql-db`.
 
 ---
 
-## 3. Access the application via browser
+## 4. Access the application via browser
 
 Open your browser and go to:
 
-```
+```text
 http://localhost:8080
 ```
 
-You should see the Django TodoList application running successfully.
+---
+
+## 5. Notes
+
+- Docker volume `mysql_data` is used to persist MySQL data.
+- Make sure ports **3306** and **8080** are not used by other applications.
+- Both containers must be started inside the same Docker network.
 
 ---
 
-## 4. Notes
+## 6. Validation checklist
 
-- Make sure port **3306** is not used by another local MySQL instance.
-- Docker volume `mysql_data` ensures MySQL data persistence between container restarts.
-- The Django application runs migrations automatically on startup.
-
----
-
-## 5. Validation
-
-- Application image pushed with tag: **todoapp:2.0.0**
-- MySQL image pushed with tag: **mysql-local:1.0.0**
-- Containers start successfully and communicate correctly
+- MySQL container running with volume attached
+- Django application container running successfully
+- Containers communicate via Docker network
+- Application accessible via browser
 
 ---
 
