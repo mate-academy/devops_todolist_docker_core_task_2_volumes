@@ -22,8 +22,16 @@ Docker Hub: https://hub.docker.com/r/vovakomar/mysql-local
 > `docker network create todonet`
 
 ### Run MySQL container with volume and network
-Update the Django DATABASES['default']['HOST'] to the MySQL container IP before building the app container:
 > `docker run -d --name mysql-local --network todonet -v mysql_data:/var/lib/mysql vovakomar/mysql-local:1.0.0`
+
+#### Note:
+To connect the Django app to this MySQL container, either:
+> 1. Inspect the container IP and paste it in todolist/settings.py:
+> - docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}" mysql-local
+> - DATABASES['default']['HOST'] = "<container_ip>"
+
+> 2. Or keep both containers on the same user-defined network (todonet) and set:
+> - DATABASES['default']['HOST'] = "mysql-local"
 
 ### Check MySQL logs
 > `docker logs mysql-local`
@@ -49,14 +57,14 @@ Docker Hub: https://hub.docker.com/r/vovakomar/todoapp
 ## 3. Access Application
 http://localhost:8000
 > The Django server runs inside the container on 0.0.0.0:8000, mapped to host port 8000.
-### Note:
-> To connect the Django app to this MySQL container, update DATABASES['default']['HOST'] in todolist/settings.py to either the container's IP or the container hostname (e.g. 'mysql-local') if both containers are in the same Docker network.
 
 ## 4. Migrations
 Run migrations inside the container if not done during build
-`docker exec -it todoapp python manage.py migrate`
+
+> `docker exec -it todoapp python manage.py migrate`
 
 ## 5. Notes
-- Both containers must be in the same Docker network `todonet`
-- MySQL data persists thanks to the `mysql_data` volume
+- Both containers must be on the same Docker network `todonet` for hostname resolution  
+- MySQL data persists in the `mysql_data` volume  
+- Before running Django in Docker, ensure DATABASES['default']['HOST'] points to either container IP or hostname (e.g., 'mysql-local') per the instructions above
 
