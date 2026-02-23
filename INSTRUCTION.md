@@ -5,84 +5,110 @@
 
 ---
 
-## 1. Pull Prebuilt Images
-First, pull the necessary images from Docker Hub to your local machine:
+## 1. Environment Setup
+To enable containers to communicate using names (DNS) instead of unstable IP addresses, create a dedicated Docker network:
 
 ```bash
-docker pull bohn13/mysql-local:1.0.0
-docker pull bohn13/todoapp:2.0.0
+docker network create todonet
 ```
 
 ---
 
 ## 2. MySQL Database Setup
 
-### Option A: Build the Image Manually
+### Build, Tag, and Push
 
-If you need to modify the MySQL credentials or configuration, edit `Dockerfile.mysql` and build the image locally:
+If you are building the database image locally:
 
 ```bash
+# Build the image from Dockerfile.mysql
 docker build -f Dockerfile.mysql -t mysql-local:1.0.0 .
+
+# Tag for your Docker Hub repository
+docker tag mysql-local:1.0.0 bohn13/mysql-local:1.0.0
+
+# Push to Docker Hub
+docker push bohn13/mysql-local:1.0.0
+
 ```
 
-### Option B: Run MySQL Container
+### Run MySQL Container
 
-Run the container with a persistent volume and the required environment variables:
+Launch the MySQL container within the `todonet` network. This allows the app to find the DB using the hostname `mysql_data`.
 
 ```bash
-docker run -d --name mysql_data -p 3306:3306 -e MYSQL_DATABASE=app_db -e MYSQL_USER=app_user -e MYSQL_PASSWORD=1234 -e MYSQL_ROOT_PASSWORD=1234 -v mysql-data-volume:/var/lib/mysql mysql-local:1.0.0
-```
+docker run -d \
+  --name mysql_data \
+  --network todonet \
+  -p 3306:3306 \
+  -e MYSQL_DATABASE=app_db \
+  -e MYSQL_USER=app_user \
+  -e MYSQL_PASSWORD=1234 \
+  -e MYSQL_ROOT_PASSWORD=1234 \
+  -v mysql-data-volume:/var/lib/mysql \
+  bohn13/mysql-local:1.0.0
 
-> **Verification:** Check the logs to ensure the database is ready: `docker logs mysql_data`
+```
 
 ---
 
-## 3. Connect App to MySQL
+## 3. Todo Application Setup
 
-The application requires the specific IP address of the running MySQL container to establish a connection.
+### Build, Tag, and Push
 
-1. **Retrieve Container IP:**
-Run the following command to get the internal IP address of the `mysql_data` container:
+Build and upload the application image:
+
 ```bash
-docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' mysql_data
+# Build the application image
+docker build -t todoapp:2.0.0 .
+
+# Tag for your Docker Hub repository
+docker tag todoapp:2.0.0 bohn13/todoapp:2.0.0
+
+# Push to Docker Hub
+docker push bohn13/todoapp:2.0.0
+
 ```
 
+### Run App Container
 
-2. **Update App Configuration:**
-Open `todolist/settings.py`, find the `DATABASES` section, and replace the `HOST` value with the IP address retrieved in the previous step (e.g., `'HOST': '172.17.0.2'`).
+Run the application container on the same network. We pass the database hostname via the `DB_HOST` environment variable.
 
-3. **Rebuild App Image:**
-After updating the host, rebuild the application image to apply the changes:
 ```bash
-docker build -t bohn13/todoapp:2.0.0 .
+docker run -d \
+  --name todoapp \
+  --network todonet \
+  -p 8080:8000 \
+  -e DB_HOST=mysql_data \
+  bohn13/todoapp:2.0.0
 ```
-
-
 
 ---
 
-## 4. Run Todo App Container
+## 4. Access and Verification
 
-Once the database is running and the configuration is updated, launch the application container:
+### Port Binding & Connectivity
 
-```bash
-docker run -d --name todoapp -p 8080:8000 bohn13/todoapp:2.0.0
-```
+* **Django Binding:** The server inside the container is configured to bind to `0.0.0.0:8000` to be accessible from outside the container.
+* **Host Mapping:** The command `-p 8080:8000` maps your local machine's port `8080` to the container's internal port `8000`.
+* **Service Discovery:** By using `--network todonet`, the app connects to the database via the container name (`mysql_data`).
 
-* **Port Mapping:** The application maps internal port `8000` to your local port `8080`.
-* **Logs:** Monitor the application startup using `docker logs todoapp`.
+### Access the Website
 
----
-
-## 5. Access the Application
-
-Open your browser and navigate to:
+Open your browser and visit:
 [http://127.0.0.1:8080/](http://127.0.0.1:8080/)
 
+### Troubleshooting
+
+Check the logs if the application fails to start:
+
+```bash
+docker logs todoapp
+docker logs mysql_data
+```
+
 ---
 
-### Technical Notes
+### Technical Note on Configuration
 
-* **Database:** This project uses MySQL. SQLite support has been removed to meet the deployment requirements.
-* **Persistence:** Data is stored in the `mysql-data-volume` Docker volume to ensure it persists after container restarts.
-* **Connectivity:** Ensure the MySQL container is started **before** the App container.
+The `todolist/settings.py` uses literal values for `NAME`, `USER`, and `PASSWORD` as required. The `HOST` is dynamically managed via the `DB_HOST` environment variable, and `PORT` is set to an empty string `''` to utilize the default MySQL port.
