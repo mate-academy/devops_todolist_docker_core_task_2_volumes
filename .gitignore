@@ -1,0 +1,37 @@
+# Byte-code files
+*.pyc
+__pycache__/
+*.whl
+*.egg-info/
+.eggs/
+
+# Virtual environment
+# Use a specific name like 'venv' for clarity
+venv/
+env/
+.venv/
+.env
+
+# Build artifacts
+dist/
+build/
+*.pyd
+*.sqlite3
+
+# Testing and debugging
+.pytest_cache/
+nosetests.xml
+
+# Editor/IDE-specific files
+# VS Code
+.vscode/
+# PyCharm
+.idea/
+
+# OS-generated files
+.DS_Store
+.directory
+
+# Python version files
+.python-version
+
