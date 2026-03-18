@@ -1,0 +1,2 @@
+-- Schema is managed by Django migrations (python manage.py migrate).
+-- MYSQL_USER/MYSQL_DATABASE in Dockerfile.mysql set up app_user and app_db.
