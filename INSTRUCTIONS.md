@@ -1,17 +1,25 @@
-## Run Database
+## Network
 
-Run database with volume attached
+Firstly create network:
 
 ```bash
-docker run -d -p 3306:3306 -v checklistdb:/var/lib/mysql killingrace/mysql-local:1.0.0
+docker network create todo-net
+```
+
+## Run Database
+
+Run the database container on this network with a hostname:
+
+```bash
+docker run -d -p 3306:3306 -v checklistdb:/var/lib/mysql --network todo-net killingrace/mysql-local:1.0.0
 ```
 
 ## Run
 
-Run app after running database container 
+Run app after running database container:
 
 ```bash
-docker run -d -p 8080:8080 killingrace/todoapp:2.0.0
+docker run -d -p 8080:8080 --network todo-net killingrace/todoapp:2.0.0
 ```
 
 ## Docker Hub
