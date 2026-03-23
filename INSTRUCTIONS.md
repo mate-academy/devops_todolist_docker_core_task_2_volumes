@@ -11,7 +11,7 @@ docker run -d -p 3306:3306 -v checklistdb:/var/lib/mysql killingrace/mysql-local
 Run app after running database container 
 
 ```bash
-docker run -d -p 8080:8080 django-app:latest
+docker run -d -p 8080:8080 killingrace/todoapp:2.0.0
 ```
 
 ## Docker Hub
