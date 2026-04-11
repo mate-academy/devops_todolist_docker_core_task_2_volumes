@@ -1,35 +1,28 @@
-# Docker Setup Instructions
+# Instructions
 
-## MySQL
+## Run MySQL container with volume
 
-Build image:
+```bash
+docker run -d \
+  --name mysql-container \
+  -v mysql_data:/var/lib/mysql \
+  -p 3306:3306 \
+  YOUR_DOCKERHUB_USER/mysql-local:1.0.0
+```
 
-docker build -f Dockerfile.mysql -t mysql-local:1.0.0 .
+## Run App container (connects to MySQL)
 
-Run container:
+```bash
+docker run -d \
+  --name todoapp-container \
+  -p 8000:8000 \
+  YOUR_DOCKERHUB_USER/todoapp:2.0.0
+```
 
-docker run -d --name mysql-container -p 3307:3306 -v mysql_data:/var/lib/mysql mysql-local:1.0.0
+## Access the application
 
-## App
-
-Build image:
-
-docker build -t todoapp:2.0.0 .
-
-Run container:
-
-docker run -d -p 8081:8080 todoapp:2.0.0
-
-Run migrations:
-
-docker exec -it 9e15060665a9 python manage.py migrate
-
-## Access
-
-Open browser:
-
-http://localhost:8081
+Open in browser: http://localhost:8000
 
 ## Docker Hub
 
-https://hub.docker.com/r/justoleh/todoapp
+App image: https://hub.docker.com/r/YOUR_DOCKERHUB_USER/todoapp
