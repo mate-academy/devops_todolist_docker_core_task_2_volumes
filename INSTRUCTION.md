@@ -7,6 +7,19 @@ App image is available at:
 
 ---
 
+## How DB Host Discovery Works
+
+The app reads the MySQL host from the `DB_HOST` environment variable:
+
+```python
+'HOST': os.environ.get('DB_HOST', 'localhost')
+```
+
+- When running **locally** (without Docker): defaults to `localhost`
+- When running **in Docker**: pass `-e DB_HOST=mysql-local` to point to the MySQL container by its hostname on the shared network
+
+---
+
 ## Step 1: Create a Docker Network
 
 Create a dedicated network so the app and MySQL containers can communicate by name:
@@ -26,16 +39,6 @@ docker run -d \
   --name mysql-local \
   --network todoapp-network \
   -v mysql-data:/var/lib/mysql \
-  mysql-local:1.0.0
-```
-
-Or pull and run directly from Docker Hub:
-
-```bash
-docker run -d \
-  --name mysql-local \
-  --network todoapp-network \
-  -v mysql-data:/var/lib/mysql \
   dimonalek/mysql-local:1.0.0
 ```
 
@@ -45,26 +48,28 @@ Wait a few seconds for MySQL to fully initialize before proceeding.
 
 ## Step 3: Run the App Container
 
-Run the application container connected to the same network.
-The app runs on port **8080** inside the container, mapped to port **8080** on your host:
+Pass `DB_HOST=mysql-local` so the app connects to the MySQL container by its hostname on the Docker network.
+
+The Django server inside the container binds to `0.0.0.0:8080`, mapped to port **8080** on your host:
 
 ```bash
 docker run -d \
   --name todoapp \
   --network todoapp-network \
+  -e DB_HOST=mysql-local \
   -p 8080:8080 \
   dimonalek/todoapp:2.0.0
 ```
 
-> **Note on ports:**
-> - `http://localhost:8080` — access the **containerized** app (Docker)
-> - `http://localhost:8000` — access the app when running locally via `python manage.py runserver` (default Django dev server port)
+> **Port mapping:**
+> - `http://localhost:8080` — containerized app (Docker, port 8080 → 8080)
+> - `http://localhost:8000` — local dev only (`python manage.py runserver`, default Django port)
 
 ---
 
 ## Step 4: Run Database Migrations
 
-After the app container starts, run Django migrations to create the database schema:
+After the app container starts, apply Django migrations to create the database schema:
 
 ```bash
 docker exec todoapp python manage.py migrate
