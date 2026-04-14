@@ -39,13 +39,14 @@ docker run -d \
   dimonalek/mysql-local:1.0.0
 ```
 
-Wait a few seconds for MySQL to initialize before proceeding to the next step.
+Wait a few seconds for MySQL to fully initialize before proceeding.
 
 ---
 
 ## Step 3: Run the App Container
 
-Run the application container and connect it to the same network as the MySQL container:
+Run the application container connected to the same network.
+The app runs on port **8080** inside the container, mapped to port **8080** on your host:
 
 ```bash
 docker run -d \
@@ -55,11 +56,27 @@ docker run -d \
   dimonalek/todoapp:2.0.0
 ```
 
+> **Note on ports:**
+> - `http://localhost:8080` — access the **containerized** app (Docker)
+> - `http://localhost:8000` — access the app when running locally via `python manage.py runserver` (default Django dev server port)
+
 ---
 
-## Step 4: Access the Application
+## Step 4: Run Database Migrations
 
-Once both containers are running, open your browser and navigate to:
+After the app container starts, run Django migrations to create the database schema:
+
+```bash
+docker exec todoapp python manage.py migrate
+```
+
+> This step is required on first run or after any model changes.
+
+---
+
+## Step 5: Access the Application
+
+Once migrations are complete, open your browser and navigate to:
 
 - **Landing page:** [http://localhost:8080](http://localhost:8080)
 - **API:** [http://localhost:8080/api/](http://localhost:8080/api/)
