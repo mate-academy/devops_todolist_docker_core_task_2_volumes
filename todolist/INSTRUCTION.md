@@ -21,11 +21,11 @@ docker run -d \
   --name mysql-server \
   --network todo-network \
   --network-alias db \
-  -v /home/kitty/mysql:/var/lib/mysql \
+  -v todo_mysql_data:/var/lib/mysql \
   mysql-local:1.0.0
 ```
 * **--name:** назва контейнера для зручного керування.
-* **-v:** шлях до локальної папки на вашому хості (/home/kitty/mysql) для синхронізації з даними MySQL всередині контейнера.
+* **-v:** шлях до локальної папки на вашому хості (todo_mysql_data) для синхронізації з даними MySQL всередині контейнера.
 
 ## 3. Запуск контейнера з додатком
 Образ додатка доступний у Docker Hub:
