@@ -49,4 +49,4 @@ docker exec -it my-todo-app python manage.py migrate
 Після успішного виконання всіх кроків додаток буде доступний у браузері за адресою:
 http://localhost:8081/
 
-**[Docker Hub Repository](https://hub.docker.com/r/zeroootwo/todoapp)**
+**Docker Hub Repository [https://hub.docker.com/r/zeroootwo/todoapp](https://hub.docker.com/r/zeroootwo/todoapp)**
