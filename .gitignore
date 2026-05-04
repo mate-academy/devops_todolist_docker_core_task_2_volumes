@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# Віртуальне середовище
+venv/
+.venv/
+env/
+ENV/
+
+# Django
+db.sqlite3
+*.log
+local_settings.py
+media/
+
+# Збірка
+*.egg
+*.egg-info/
+dist/
+build/
+wheels/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
