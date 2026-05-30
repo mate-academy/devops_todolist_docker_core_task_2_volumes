@@ -20,7 +20,7 @@ To start the MySQL database container with a persistent volume to preserve data,
  ## Step 2: Run an App container which will connect to a MySQL db container.
 
  ```bash
- docker run --name todo_app -p 8000:8080 -d todoapp:2.0.0 
+ docker run --name todo_app --network bridge -p 8000:8000 -d todoapp:2.0.0 
 ```
 
 Docker Hub images:
