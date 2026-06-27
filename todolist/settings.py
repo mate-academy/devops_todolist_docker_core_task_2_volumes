@@ -67,8 +67,8 @@ DATABASES = {
         'NAME': 'app_db',
         'USER': 'app_user',
         'PASSWORD': '1234',
-        'HOST': '172.17.0.2',  # IP твого MySQL контейнера
-        'PORT': '3306',  # Leave this empty to use the default MySQL port (3306).
+         'HOST': os.environ.get('DB_HOST', 'localhost'),
+        'PORT': os.environ.get('DB_PORT', ''), 
     }
 
 
