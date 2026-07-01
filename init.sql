@@ -1,0 +1,6 @@
+USE app_db;
+
+CREATE TABLE IF NOT EXISTS counter (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    value INT
+);
