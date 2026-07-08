@@ -47,7 +47,21 @@ docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' mys
 ```
 
 Update the `HOST` value in `todolist/settings.py` (`DATABASES` section)
-with the IP address returned above.
+with the IP address returned above. The database configuration should
+look like this:
+
+```python
+DATABASES = {
+    'default': {
+        'ENGINE': 'mysql.connector.django',
+        'NAME': 'app_db',
+        'USER': 'app_user',
+        'PASSWORD': '1234',
+        'HOST': '',
+        'PORT': '',
+    }
+}
+```
 
 ## 4. Build the app image
 
