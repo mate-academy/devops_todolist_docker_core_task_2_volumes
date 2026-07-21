@@ -11,7 +11,7 @@ docker run -d --name todo-app -p 8000:8000 diashockh/todoapp:2.0.0
 ```
 
 ## 3. Docker Hub Repository
-https://hub.docker.com/r//todoapp
+https://hub.docker.com/r/diashockh/todoapp
 
 ## 4. Accessing the Application
 http://localhost:8000
