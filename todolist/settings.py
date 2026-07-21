@@ -67,7 +67,7 @@ DATABASES = {
         'NAME': 'app_db',
         'USER': 'app_user',
         'PASSWORD': '1234',
-        'HOST': 'localhost',
+        'HOST': 'mysql-server',
         'PORT': '',  
     }
 }
