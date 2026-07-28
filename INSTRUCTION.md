@@ -1,4 +1,3 @@
-Markdown
 # Instructions for Running Django-Todolist with MySQL in Docker
 
 This document provides step-by-step instructions on how to run the MySQL database container with attached volumes and the Django application container.
