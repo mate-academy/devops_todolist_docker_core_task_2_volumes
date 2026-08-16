@@ -75,3 +75,8 @@ During application startup, Django database migrations are executed automaticall
 After both containers are running, open the following address in your browser:
 
 http://localhost:8080/
+
+## The screenshot of working containers:
+
+https://files.catbox.moe/tw67rm.png
+
