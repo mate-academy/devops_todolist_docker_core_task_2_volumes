@@ -57,4 +57,4 @@ https://hub.docker.com/repository/docker/qwertyasd0933/mysql-local/general
 
 Open the following address in a web browser:
 
-http://localhost:8000
+http://localhost:8080
