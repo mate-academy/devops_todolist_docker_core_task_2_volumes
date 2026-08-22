@@ -16,4 +16,4 @@ jobs:
       run: docker build . --tag task:${{ github.actor }}
 
     - name: Build the Docker image for MySQL
-      run: docker build . -f Dockerfile.mysql.mysql --tag task:${{ github.actor }}
+      run: docker build . -f Dockerfile.mysql --tag task:${{ github.actor }}
