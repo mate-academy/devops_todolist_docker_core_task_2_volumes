@@ -65,9 +65,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'mysql.connector.django',
         'NAME': 'app_db',
-        'USER': 'user',
+        'USER': 'app_user',
         'PASSWORD': '1234',
-        'HOST': '172.17.0.2',  # тимчасово, потім заміните на IP контейнера MySQL
+        'HOST': 'localhost',  # тимчасово, потім заміните на IP контейнера MySQL
         'PORT': '',
     }
 
