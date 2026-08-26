@@ -4,7 +4,7 @@
 
 Run the MySQL container with a named volume to persist database data:
 
-docker run -v mysql-data:/var/lib/mysql -d -p 8080:3306 daniilshpak/mysql-local:1.0.0
+docker run -v mysql-data:/var/lib/mysql -d -p 3306:3306 daniilshpak/mysql-local:1.0.0
 
 The mysql-data volume stores MySQL data in /var/lib/mysql and keeps the data persistent.
 
