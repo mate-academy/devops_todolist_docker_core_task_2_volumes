@@ -4,7 +4,9 @@
 
 ### MySQL image
 
-Docker Hub repository: ericca0203/mysql-local
+Docker Hub repository:
+
+https://hub.docker.com/r/ericca0203/mysql-local
 
 Image:
 
@@ -14,7 +16,9 @@ ericca0203/mysql-local:1.0.0
 
 ### Application image
 
-Docker Hub repository: ericca0203/todoapp
+Docker Hub repository:
+
+https://hub.docker.com/r/ericca0203/todoapp
 
 Image:
 
@@ -29,32 +33,48 @@ ericca0203/todoapp:2.0.0
 Create a persistent volume for MySQL data:
 
 ```bash
-docker volume create mysql-data
+docker volume create mysql_data
 ```
 
 ---
 
-## 2. Run MySQL container
+## 2. Build the MySQL image
 
-Run the MySQL container using the `mysql-local:1.0.0` image with the volume attached:
+Build the MySQL image from `Dockerfile.mysql`:
 
 ```bash
-docker run -d --name mysql-local -v mysql-data:/var/lib/mysql mysql-local:1.0.0
+docker build -f Dockerfile.mysql -t mysql-local:1.0.0 .
 ```
 
-Check that the MySQL container is running:
+Tag the image for Docker Hub:
+
+```bash
+docker tag mysql-local:1.0.0 ericca0203/mysql-local:1.0.0
+```
+
+Push the image to Docker Hub:
+
+```bash
+docker push ericca0203/mysql-local:1.0.0
+```
+
+---
+
+## 3. Run the MySQL container
+
+Run the MySQL container with the persistent volume attached:
+
+```bash
+docker run -d --name mysql-local -v mysql_data:/var/lib/mysql mysql-local:1.0.0
+```
+
+Check that the container is running:
 
 ```bash
 docker ps
 ```
 
-The container should have the status:
-
-```text
-Up
-```
-
-Check the MySQL container logs:
+Check MySQL logs:
 
 ```bash
 docker logs mysql-local
@@ -66,9 +86,15 @@ MySQL should report:
 MySQL init process done. Ready for start up.
 ```
 
+and:
+
+```text
+ready for connections
+```
+
 ---
 
-## 3. Get the MySQL container IP address
+## 4. Get the MySQL container IP address
 
 Get the IP address of the running MySQL container:
 
@@ -82,11 +108,11 @@ Example:
 172.17.0.5
 ```
 
-Use the IP address returned by Docker as the database host.
+Use the IP address returned by Docker in `todolist/settings.py`.
 
 ---
 
-## 4. Configure Django database connection
+## 5. Configure the Django database connection
 
 Open:
 
@@ -104,7 +130,7 @@ DATABASES = {
         'USER': 'app_user',
         'PASSWORD': '1234',
         'HOST': '172.17.0.5',
-        'PORT': '',
+        'PORT': '3306',
     }
 }
 ```
@@ -113,31 +139,53 @@ Replace `172.17.0.5` with the actual IP address of the running MySQL container i
 
 ---
 
-## 5. Build the Django application image
+## 6. Install Python dependencies
 
-Build the application image with tag `todoapp:2.0.0`:
+The project requires the MySQL connector:
+
+```text
+mysql-connector-python==8.2.0
+```
+
+Install all project dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## 7. Build the Django application image
+
+Build the application image:
 
 ```bash
 docker build -t todoapp:2.0.0 .
 ```
 
-Check the image:
+Tag the image for Docker Hub:
 
 ```bash
-docker images
+docker tag todoapp:2.0.0 ericca0203/todoapp:2.0.0
+```
+
+Push the image to Docker Hub:
+
+```bash
+docker push ericca0203/todoapp:2.0.0
 ```
 
 ---
 
-## 6. Run the Django application container
+## 8. Run the Django application container
 
-Run the application container and expose port `8080`:
+Run the application container:
 
 ```bash
 docker run -d --name todoapp-v2 -p 8080:8080 todoapp:2.0.0
 ```
 
-Check that both containers are running:
+Check that both MySQL and Django containers are running:
 
 ```bash
 docker ps
@@ -152,7 +200,7 @@ todoapp-v2
 
 ---
 
-## 7. Access the application
+## 9. Access the application
 
 Open the application in a web browser:
 
@@ -164,25 +212,7 @@ The Django ToDo application should be displayed.
 
 ---
 
-## 8. Docker Hub images
-
-The MySQL image:
-
-```text
-ericca0203/mysql-local:1.0.0
-```
-
-The Django application image:
-
-```text
-ericca0203/todoapp:2.0.0
-```
-
-Both images are available in the Docker Hub repositories.
-
----
-
-## 9. Useful Docker commands
+## 10. Useful Docker commands
 
 Check running containers:
 
@@ -202,13 +232,19 @@ Check MySQL logs:
 docker logs mysql-local
 ```
 
-Stop the application:
+Check application logs:
+
+```bash
+docker logs todoapp-v2
+```
+
+Stop the application container:
 
 ```bash
 docker stop todoapp-v2
 ```
 
-Stop MySQL:
+Stop the MySQL container:
 
 ```bash
 docker stop mysql-local
@@ -226,16 +262,28 @@ Remove the MySQL container:
 docker rm mysql-local
 ```
 
-The MySQL data remains stored in the `mysql-data` volume.
+The MySQL data remains stored in the `mysql_data` volume.
 
 ---
 
-## 10. Docker Hub
-
-Application repository:
-
-ericca0203/todoapp
+## 11. Docker Hub repositories
 
 MySQL repository:
 
-ericca0203/mysql-local
+https://hub.docker.com/r/ericca0203/mysql-local
+
+Application repository:
+
+https://hub.docker.com/r/ericca0203/todoapp
+
+MySQL image:
+
+```text
+ericca0203/mysql-local:1.0.0
+```
+
+Application image:
+
+```text
+ericca0203/todoapp:2.0.0
+```
