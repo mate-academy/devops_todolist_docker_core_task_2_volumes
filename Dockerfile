@@ -1,24 +1,32 @@
-# Stage 1: Build Stage
-ARG PYTHON_VERSION=3.8
-FROM python:${PYTHON_VERSION} as builder
+ARG PYTHON_VERSION=3.11-slim
 
-# Set the working directory
+FROM python:${PYTHON_VERSION} AS build
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+
 WORKDIR /app
+
+RUN python -m venv /opt/venv
+ENV PATH="/opt/venv/bin:${PATH}"
+
+COPY requirements.txt .
+RUN pip install --upgrade pip \
+    && pip install --no-cache-dir -r requirements.txt
+
+FROM python:${PYTHON_VERSION} AS run
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PATH="/opt/venv/bin:${PATH}"
+
+WORKDIR /app
+
+COPY --from=build /opt/venv /opt/venv
 COPY . .
 
-# Stage 2: Run Stage
-FROM python:${PYTHON_VERSION} as run
+RUN python manage.py migrate --noinput
 
-WORKDIR /app
+EXPOSE 8080
 
-ENV PYTHONUNBUFFERED=1
-
-COPY --from=builder /app .
-
-RUN pip install --upgrade pip && \
-    pip install -r requirements.txt
-
-RUN python manage.py migrate
-
-# Run database migrations and start the Django application
-ENTRYPOINT ["python", "manage.py", "runserver", "0.0.0.0:8080"]
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8080"]
