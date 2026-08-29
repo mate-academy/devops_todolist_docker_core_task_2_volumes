@@ -6,6 +6,12 @@ App image: `bodya4243/todoapp:2.0.0`
 
 ## MySQL Container With Volume
 
+Create the shared Docker network once:
+
+```bash
+docker network create todo-net
+```
+
 Create a persistent volume for MySQL data:
 
 ```bash
@@ -17,6 +23,8 @@ Run the MySQL container with the volume attached:
 ```bash
 docker run -d \
   --name mysql_bd \
+  --network todo-net \
+  --network-alias mysql \
   -p 3306:3306 \
   -v mysql_data:/var/lib/mysql \
   mysql-local:1.0.0
@@ -38,23 +46,35 @@ docker build --build-arg PYTHON_VERSION=3.11-slim -t todoapp:2.0.0 .
 
 ## Run the App Container
 
-The app container must connect to the running MySQL container. Use the MySQL container IP in `todolist/settings.py`:
+The app container must connect to the running MySQL container on the same Docker network. A user-defined network keeps the hostname stable across machines.
+
+The app reads the database host from `MYSQL_HOST`. Keep it set to the MySQL network alias:
 
 ```bash
-172.17.0.2
+MYSQL_HOST=mysql
 ```
 
 Run the app container and publish port 8080:
 
 ```bash
-docker run -d --name todoapp -p 8080:8080 todoapp:2.0.0
+docker run -d \
+  --name todoapp \
+  --network todo-net \
+  -e MYSQL_HOST=mysql \
+  -p 8080:8080 \
+  todoapp:2.0.0
 ```
 
 If a container named `todoapp` already exists:
 
 ```bash
 docker rm -f todoapp
-docker run -d --name todoapp -p 8080:8080 todoapp:2.0.0
+docker run -d \
+  --name todoapp \
+  --network todo-net \
+  -e MYSQL_HOST=mysql \
+  -p 8080:8080 \
+  todoapp:2.0.0
 ```
 
 ## Pull From Docker Hub
@@ -68,7 +88,12 @@ docker pull bodya4243/todoapp:2.0.0
 Run the published image:
 
 ```bash
-docker run -d --name todoapp -p 8080:8080 bodya4243/todoapp:2.0.0
+docker run -d \
+  --name todoapp \
+  --network todo-net \
+  -e MYSQL_HOST=mysql \
+  -p 8080:8080 \
+  bodya4243/todoapp:2.0.0
 ```
 
 ## Access in a Browser
