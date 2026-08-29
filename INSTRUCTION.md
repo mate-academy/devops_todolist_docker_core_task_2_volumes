@@ -9,9 +9,9 @@ Use the following links below:
     - for running MySQL container with a volume attached:
         docker run  -d -p 3306:3306 --name olena-mysql -v olena-mysql-data:/var/lib/mysql mysql-local:1.0.0
     - for build "app" image
-        docker build . -t app:1.0
+        docker build . -t todoapp:2.0.0
     - for running an App container which will connect to a MySQL db container:
-        docker run -p 8083:8080 --name app app:1.0
+        docker run -p 8083:8080 --name app todoapp:2.0.0
 
 
 3. Instructions on accessing the application via a browser:
