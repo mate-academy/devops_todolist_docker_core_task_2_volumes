@@ -67,7 +67,7 @@ DATABASES = {
         "NAME": os.getenv("DB_NAME", "app_db"),
         "USER": os.getenv("DB_USER", "app_user"),
         "PASSWORD": os.getenv("DB_PASSWORD", "1234"),
-        "HOST": os.getenv("DB_HOST", "172.17.0.2"),
+        "HOST": os.getenv("DB_HOST", "host.docker.internal"),
         "PORT": os.getenv("DB_PORT", ""),  # Leave this empty to use the default MySQL port (3306).
     }
 
