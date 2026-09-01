@@ -1,6 +1,7 @@
 # Instructions for Running Django TodoList with MySQL in Docker
 
 ## Docker Hub Repository
+
 - **Application Image Repository:** [https://hub.docker.com/r/leonetsbogdan/todoapp](https://hub.docker.com/r/leonetsbogdan/todoapp)
 - **Image Tag:** `leonetsbogdan/todoapp:2.0.0`
 
@@ -33,6 +34,11 @@ docker run -d \
   -p 8080:8080 \
   leonetsbogdan/todoapp:2.0.0
 ```
+
+> **Tip (Dynamic Host):** If MySQL is running on a different IP or container hostname, you can override the host dynamically using the `DB_HOST` environment variable:
+> ```bash
+> docker run -d --name todoapp-container -p 8080:8080 -e DB_HOST=<MYSQL_IP_OR_HOST> leonetsbogdan/todoapp:2.0.0
+> ```
 
 ---
 
