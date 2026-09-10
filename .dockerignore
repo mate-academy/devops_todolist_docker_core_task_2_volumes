@@ -1,0 +1,13 @@
+.git
+.github
+.idea
+.venv
+venv/
+env/
+__pycache__/
+*.py[cod]
+db.sqlite3
+*.bak
+.DS_Store
+*.log
+INSTRUCTION.md

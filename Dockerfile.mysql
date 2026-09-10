@@ -1,0 +1,12 @@
+# MySQL database image for Django-Todolist
+# Build: docker build -f Dockerfile.mysql -t mysql-local:1.0.0 .
+FROM mysql:8.0
+
+# Database initialization variables, applied by the official entrypoint
+# on the first start with an empty data directory
+ENV MYSQL_DATABASE=app_db
+ENV MYSQL_USER=app_user
+ENV MYSQL_PASSWORD=1234
+ENV MYSQL_ROOT_PASSWORD=root1234
+
+EXPOSE 3306
