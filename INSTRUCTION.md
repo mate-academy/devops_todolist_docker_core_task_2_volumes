@@ -26,14 +26,21 @@ docker volume create mysql_data
 The named volume keeps the database data when the MySQL container is stopped
 or removed.
 
+Create a dedicated Docker network so the application can connect to MySQL by
+the stable container name `mysql-container`:
+
+```bash
+docker network create todo-network
+```
+
 ## 3. Run the MySQL container
 
-Run MySQL before the application so that it receives the expected Docker IP
-address (`172.17.0.2`):
+Run MySQL on the dedicated network:
 
 ```bash
 docker run -d \
   --name mysql-container \
+  --network todo-network \
   -v mysql_data:/var/lib/mysql \
   aleksmajlo/mysql-local:1.0.0
 ```
@@ -49,23 +56,16 @@ do
 done
 ```
 
-Check the MySQL container IP:
-
-```bash
-docker inspect \
-  -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' \
-  mysql-container
-```
-
-The output should be `172.17.0.2`, matching `HOST` in
-`todolist/settings.py`. If another container already uses this address, stop
-that container, recreate `mysql-container`, and check the address again.
+The application uses `mysql-container` as the database host and the default
+MySQL port. Docker resolves this name automatically for containers attached to
+`todo-network`.
 
 ## 4. Run the application container
 
 ```bash
 docker run -d \
   --name todoapp-container \
+  --network todo-network \
   -p 8000:8080 \
   aleksmajlo/todoapp:2.0.0
 ```
@@ -102,6 +102,7 @@ docker start todoapp-container
 
 ```bash
 docker rm -f todoapp-container mysql-container
+docker network rm todo-network
 ```
 
 Removing the containers does not remove the `mysql_data` volume. Do not remove
