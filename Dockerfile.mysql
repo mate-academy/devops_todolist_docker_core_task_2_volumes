@@ -1,5 +1,5 @@
 # Use the official MySQL image from Docker Hub
-FROM mysql-local:1.0.0
+FROM mysql:latest
 
 # Environment variables for MySQL configuration
 ENV MYSQL_ROOT_PASSWORD=1234
