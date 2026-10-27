@@ -1,0 +1,6 @@
+venv/
+venv39/
+.git/
+__pycache__/
+*.pyc
+db.sqlite3
