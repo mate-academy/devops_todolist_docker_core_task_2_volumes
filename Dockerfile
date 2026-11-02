@@ -1,24 +1,39 @@
-# Stage 1: Build Stage
-ARG PYTHON_VERSION=3.8
-FROM python:${PYTHON_VERSION} as builder
+# Stage 1: Build
+ARG PYTHON_VERSION=3.10
 
-# Set the working directory
+FROM python:${PYTHON_VERSION}-slim AS builder
+
 WORKDIR /app
-COPY . .
 
-# Stage 2: Run Stage
-FROM python:${PYTHON_VERSION} as run
+# Create Python virtual environment
+RUN python -m venv /opt/venv
+
+# Use virtual environment
+ENV PATH="/opt/venv/bin:$PATH"
+
+# Copy dependencies
+COPY requirements.txt .
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+
+# Stage 2: Runtime
+FROM python:${PYTHON_VERSION}-slim AS runtime
 
 WORKDIR /app
 
 ENV PYTHONUNBUFFERED=1
+ENV PATH="/opt/venv/bin:$PATH"
 
-COPY --from=builder /app .
+# Copy installed dependencies from builder
+COPY --from=builder /opt/venv /opt/venv
 
-RUN pip install --upgrade pip && \
-    pip install -r requirements.txt
+# Copy Django application
+COPY . .
 
-RUN python manage.py migrate
+# Expose Django port
+EXPOSE 8080
 
-# Run database migrations and start the Django application
-ENTRYPOINT ["python", "manage.py", "runserver", "0.0.0.0:8080"]
+# Start Django application
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8080"]
