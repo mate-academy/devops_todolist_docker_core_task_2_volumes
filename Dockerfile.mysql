@@ -1,0 +1,17 @@
+# Use the official MySQL image as the base
+FROM mysql:8.0
+
+# Root password for the MySQL server
+ENV MYSQL_ROOT_PASSWORD=rootpassword
+
+# Database created automatically on the first start
+ENV MYSQL_DATABASE=app_db
+
+# User (with full access to app_db) created automatically on the first start
+ENV MYSQL_USER=app_user
+ENV MYSQL_PASSWORD=1234
+
+# MySQL stores its data here - mount a volume to this path to persist data
+VOLUME /var/lib/mysql
+
+EXPOSE 3306
