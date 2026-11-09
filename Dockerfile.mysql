@@ -8,5 +8,3 @@ ENV MYSQL_PASSWORD=1234
 EXPOSE 3306
 
 VOLUME /var/lib/mysql
-
-COPY init.sql /docker-entrypoint-initdb.d/
