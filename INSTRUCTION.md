@@ -1,8 +1,8 @@
 # Todo App with MySQL in Docker
 
 ## Docker Hub
-- MySQL image: https://hub.docker.com/r/<dockerhub-user>/mysql-local
-- App image: https://hub.docker.com/r/<dockerhub-user>/todoapp
+- MySQL image: https://hub.docker.com/r/agarnaga/mysql-local
+- App image: https://hub.docker.com/r/agarnaga/todoapp
 
 ## 1. Run the MySQL container with a volume
 
@@ -12,7 +12,7 @@ docker pull agarnaga/mysql-local:1.0.0
 docker run -d --name mysql-db \
   -p 3306:3306 \
   -v mysql_data:/var/lib/mysql \
-  <dockerhub-user>/mysql-local:1.0.0
+  agarnaga/mysql-local:1.0.0
 ```
 
 The `mysql_data` volume keeps database data after the container is removed.
