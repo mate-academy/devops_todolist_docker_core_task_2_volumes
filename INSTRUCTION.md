@@ -40,7 +40,7 @@ Or use the published image:
 
 ```bash
 docker pull agarnaga/todoapp:2.0.0
-docker run -d --name todoapp -p 8080:8080 <dockerhub-user>/todoapp:2.0.0
+docker run -d --name todoapp -p 8080:8080 agarnaga/todoapp:2.0.0
 ```
 
 Note: the published image has the MySQL IP baked in at build time. If your
