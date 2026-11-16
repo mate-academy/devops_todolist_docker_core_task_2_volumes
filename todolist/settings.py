@@ -67,8 +67,8 @@ DATABASES = {
         "NAME": "app_db",
         "USER": "app_user",
         "PASSWORD": "1234",
-        "HOST": "todo-mysql",
-        "PORT": "3306",
+        "HOST": "172.18.0.2",
+        "PORT": "",
     }
 }
 

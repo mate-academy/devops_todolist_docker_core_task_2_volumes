@@ -44,3 +44,7 @@ http://localhost:8080
 To access the ToDo list:
 
 http://localhost:8080/todolist
+
+## Application Startup Screenshot
+
+![Successful Django startup](screenshots/django-startup.png)
