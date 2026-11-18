@@ -12,7 +12,15 @@ docker network create todonet
 docker run -d -p 3307:3306 --name mysql-mate --network todonet -v my-mysql-data:/var/lib/mysql mysql-local:1.0.0
 ```
 
-## 3. Run App container
+## 3. Get MySQL container IP
+
+```bash
+docker inspect mysql-mate | grep IPAddress
+```
+
+The app is configured to connect to this IP (`HOST` in `todolist/settings.py`). Update it if the IP differs.
+
+## 4. Run App container
 
 ```bash
 docker run -d -p 8000:8080 --name todoapp --network todonet vaitekusartem/todoapp:2.0.0
